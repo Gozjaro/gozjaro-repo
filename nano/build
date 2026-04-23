@@ -1,0 +1,4 @@
+#!/bin/sh -e
+./configure --prefix=/usr --sysconfdir=/etc --enable-utf8
+make
+make DESTDIR="$1" install

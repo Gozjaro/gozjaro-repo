@@ -1,0 +1,4 @@
+#!/bin/sh -e
+./configure --prefix=/usr --with-ssl=openssl
+make
+make DESTDIR="$1" install

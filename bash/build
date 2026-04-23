@@ -1,0 +1,7 @@
+#!/bin/sh -e
+./configure --prefix=/usr \
+    --without-bash-malloc \
+    --with-installed-readline
+make
+make DESTDIR="$1" install
+ln -sfv bash "$1/bin/sh" 2>/dev/null || true

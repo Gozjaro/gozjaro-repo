@@ -1,0 +1,3 @@
+type=library
+description=Extended crypt library for DES, MD5, Blowfish and others
+license=LGPL-2.1-or-later

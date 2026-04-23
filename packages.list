@@ -1,0 +1,124 @@
+# Gozjaro base system packages — build order (dependency-aware).
+# Use with: gozpak repo-build -f packages.list -o ./repo
+
+# Linux API headers
+linux-headers
+
+# Core C library
+glibc
+
+# Compression libraries
+zlib
+bzip2
+xz
+zstd
+
+# Core libraries
+ncurses
+readline
+file
+expat
+libffi
+libpipeline
+gdbm
+gperf
+
+# Math libraries (needed by gcc)
+gmp
+mpfr
+mpc
+
+# Build tools (tier 1)
+m4
+bc
+flex
+bison
+binutils
+pkgconf
+
+# GCC
+gcc
+
+# Security and permissions
+attr
+acl
+libcap
+libxcrypt
+shadow
+openssl
+
+# Core utilities
+sed
+grep
+gawk
+coreutils
+diffutils
+findutils
+patch
+tar
+gzip
+less
+bash
+
+# System tools
+psmisc
+iproute2
+kbd
+kmod
+libelf
+util-linux
+e2fsprogs
+procps-ng
+
+# Build tools (tier 2)
+make
+libtool
+autoconf
+automake
+
+# Perl and modules
+perl
+xml-parser
+intltool
+
+# Python stack
+python3
+flit-core
+wheel
+setuptools
+markupsafe
+jinja2
+meson
+ninja
+
+# Text and docs
+man-pages
+iana-etc
+groff
+texinfo
+man-db
+vim
+
+# Internationalization
+gettext
+
+# System services
+dbus
+systemd
+
+# Networking
+inetutils
+curl
+wget
+openssh
+git
+rsync
+
+# Disk tools
+parted
+dosfstools
+libarchive
+
+# Testing (optional)
+check
+nano

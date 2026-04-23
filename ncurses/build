@@ -1,0 +1,13 @@
+#!/bin/sh -e
+./configure --prefix=/usr \
+    --mandir=/usr/share/man \
+    --with-shared \
+    --without-debug \
+    --without-normal \
+    --with-cxx-shared \
+    --enable-pc-files \
+    --with-pkg-config-libdir=/usr/lib/pkgconfig
+make
+make DESTDIR="$1" install
+ln -sfv libncursesw.so "$1/usr/lib/libncurses.so"
+sed -e 's/^#if.*XOPEN.*$/#if 1/' -i "$1/usr/include/curses.h"

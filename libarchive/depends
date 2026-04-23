@@ -1,0 +1,5 @@
+zlib
+bzip2
+xz
+zstd
+openssl

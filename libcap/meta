@@ -1,0 +1,3 @@
+type=library
+description=POSIX capabilities library
+license=BSD-3-Clause

@@ -1,0 +1,6 @@
+curl
+openssl
+zlib
+expat
+perl
+python3

@@ -1,0 +1,3 @@
+type=library
+description=XZ Utils compression tools
+license=GPL-2.0-or-later

@@ -1,0 +1,4 @@
+#!/bin/sh -e
+./configure --prefix=/usr --disable-static --enable-thread-safe
+make
+make DESTDIR="$1" install

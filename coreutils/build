@@ -1,0 +1,6 @@
+#!/bin/sh -e
+FORCE_UNSAFE_CONFIGURE=1 ./configure --prefix=/usr \
+    --enable-no-install-program=kill,uptime
+make
+make DESTDIR="$1" install
+mv -v "$1/usr/bin/chroot" "$1/usr/sbin/" 2>/dev/null || true

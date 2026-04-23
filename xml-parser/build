@@ -1,0 +1,4 @@
+#!/bin/sh -e
+perl Makefile.PL
+make
+make DESTDIR="$1" install

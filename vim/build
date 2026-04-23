@@ -1,0 +1,6 @@
+#!/bin/sh -e
+echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
+./configure --prefix=/usr
+make
+make DESTDIR="$1" install
+ln -sv vim "$1/usr/bin/vi" 2>/dev/null || true

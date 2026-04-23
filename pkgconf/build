@@ -1,0 +1,6 @@
+#!/bin/sh -e
+./configure --prefix=/usr --disable-static
+make
+make DESTDIR="$1" install
+ln -sv pkgconf "$1/usr/bin/pkg-config"
+ln -sv pkgconf.1 "$1/usr/share/man/man1/pkg-config.1" 2>/dev/null || true

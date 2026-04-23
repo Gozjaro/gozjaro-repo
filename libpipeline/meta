@@ -1,0 +1,3 @@
+type=library
+description=C library for manipulating pipelines of subprocesses
+license=GPL-3.0-or-later

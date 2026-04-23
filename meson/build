@@ -1,0 +1,2 @@
+#!/bin/sh -e
+pip3 install --no-build-isolation --no-deps --root="$1" --prefix=/usr "$PWD"

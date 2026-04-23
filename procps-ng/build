@@ -1,0 +1,4 @@
+#!/bin/sh -e
+./configure --prefix=/usr --disable-static --disable-kill
+make
+make DESTDIR="$1" install

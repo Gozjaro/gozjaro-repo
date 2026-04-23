@@ -1,0 +1,7 @@
+#!/bin/sh -e
+./configure --prefix=/usr \
+    --enable-shared \
+    --with-system-expat \
+    --enable-optimizations
+make
+make DESTDIR="$1" install

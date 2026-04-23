@@ -1,0 +1,3 @@
+type=library
+description=ELF object file access library
+license=LGPL-3.0-or-later

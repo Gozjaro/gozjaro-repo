@@ -1,0 +1,22 @@
+#!/bin/sh -e
+patch -Np1 -i ../glibc-2.41-fhs-1.patch
+mkdir -v build && cd build
+echo "rootsbindir=/usr/sbin" > configparms
+../configure --prefix=/usr \
+    --disable-werror \
+    --enable-kernel=4.19 \
+    --enable-stack-protector=strong \
+    --disable-nscd \
+    libc_cv_slibdir=/usr/lib
+make
+touch "$1/etc/ld.so.conf"
+sed '/test-installation/s@$(PERL)@echo not running@' -i ../Makefile
+make DESTDIR="$1" install
+sed '/RTLDLIST=/s@/usr@@g' -i "$1/usr/bin/ldd"
+mkdir -pv "$1/var/cache/nscd"
+mkdir -pv "$1/etc/ld.so.conf.d"
+cat > "$1/etc/ld.so.conf" <<'CONF'
+/usr/local/lib
+/opt/lib
+include /etc/ld.so.conf.d/*.conf
+CONF

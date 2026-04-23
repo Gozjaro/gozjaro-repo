@@ -1,0 +1,4 @@
+#!/bin/sh -e
+./configure --prefix=/usr --with-openssl --enable-threaded-resolver --disable-static
+make
+make DESTDIR="$1" install

@@ -1,0 +1,3 @@
+type=library
+description=High-quality block-sorting file compressor
+license=bzip2-1.0.6

@@ -1,0 +1,12 @@
+dbus
+kmod
+libcap
+acl
+xz
+zstd
+zlib
+bzip2
+openssl
+util-linux
+meson
+ninja

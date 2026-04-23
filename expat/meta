@@ -1,0 +1,3 @@
+type=library
+description=XML parser library
+license=MIT

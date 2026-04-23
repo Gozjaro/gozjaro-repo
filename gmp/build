@@ -1,0 +1,4 @@
+#!/bin/sh -e
+./configure --prefix=/usr --enable-cxx --disable-static
+make
+make DESTDIR="$1" install
