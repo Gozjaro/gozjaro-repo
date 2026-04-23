@@ -1,0 +1,12 @@
+#!/bin/sh -e
+install -Dm755 gozpak "$1/usr/bin/gozpak"
+
+# Install extensions
+for f in contrib/gozpak-*; do
+    [ -f "$f" ] || continue
+    install -Dm755 "$f" "$1/usr/bin/$(basename "$f")"
+done
+
+# Create default directories
+mkdir -p "$1/etc/gozpak"
+mkdir -p "$1/var/db/gozpak/installed"

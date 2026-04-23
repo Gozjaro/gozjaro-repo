@@ -119,6 +119,9 @@ parted
 dosfstools
 libarchive
 
+# Package manager
+gozpak
+
 # Testing (optional)
 check
 nano
