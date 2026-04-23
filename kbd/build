@@ -1,5 +1,5 @@
 #!/bin/sh -e
-patch -Np1 -i ../kbd-2.7.1-backspace-1.patch || true
+patch -Np1 -i kbd-2.7.1-backspace-1.patch || true
 [ -f configure ] && sed -i '/RESIZECONS_PROGS=/s/yes/no/' configure || true
 ./configure --prefix=/usr --disable-vlock
 make
