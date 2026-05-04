@@ -9,6 +9,7 @@ echo "rootsbindir=/usr/sbin" > configparms
     --disable-nscd \
     libc_cv_slibdir=/usr/lib
 make
+mkdir -pv "$1/etc"
 touch "$1/etc/ld.so.conf"
 sed '/test-installation/s@$(PERL)@echo not running@' -i ../Makefile
 make DESTDIR="$1" install
