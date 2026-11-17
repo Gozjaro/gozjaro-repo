@@ -24,11 +24,12 @@ steps = [
     "install -m644 System.map \"$DESTDIR/boot/System.map-$VERSION\"",
     "install -m644 .config \"$DESTDIR/boot/config-$VERSION\"",
     "make -j$(nproc) -s modules_install INSTALL_MOD_PATH=\"$DESTDIR\" INSTALL_MOD_STRIP=1",
-    # modules_install symlinks build/ at the staging scratch tree, which is
-    # not part of the installed system — remove it (external module builds
-    # use linux-headers + the source tarball, not this link).
-    "rm -f \"$DESTDIR/lib/modules/$VERSION/build\"",
     "make -s firmware_install INSTALL_FW_PATH=\"$DESTDIR/lib/firmware\" || true",
+    # modules_install / firmware_install both (re)create lib/modules/<ver>/build
+    # pointing at the build scratch tree, which is not part of the installed
+    # system — drop it last so nothing re-links it. External module builds
+    # use linux-headers + the source tarball.
+    "rm -f \"$DESTDIR/lib/modules/$VERSION/build\"",
 ]
 
 [install]
