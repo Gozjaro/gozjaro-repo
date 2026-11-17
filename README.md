@@ -58,6 +58,18 @@ GOZPAK_PATH=/opt/gozjaro-repo/base   # or extra/
 gozpak repo-build <pkg>
 ```
 
+## Build in a clean chroot / 在干净 chroot 里构建
+
+Use an existing LFS root (default `/mnt/lfs`) as a read-only overlay lower layer.
+使用已有的 LFS 根目录（默认 `/mnt/lfs`）作为只读下层，在临时 overlay 中构建。
+```sh
+sudo ./scripts/chroot-build.sh <pkg>...
+sudo ./scripts/chroot-build.sh --shell      # interactive shell / 交互 shell
+sudo ./scripts/chroot-build.sh --keep <pkg> # preserve upper layer / 保留上层以调试
+```
+Optional / 可选：`LFS`, `GOZPAK_REPOS`, `WORK` (默认 `/var/tmp/gozjaro-chroot`), `CACHE` (默认 `/var/cache/gozjaro`), `GOZPAK_GPKG`.
+Sources / 源码缓存：`$CACHE/gozpak/sources`; packages / 成品包：`$CACHE/gozpak/bin`; gozpak downloads automatically if needed / 按需自动下载 gozpak。
+
 ## Recipe format / recipe 格式
 
 Single-file `recipe.toml` per package (spec v1.2), one directory per package:
