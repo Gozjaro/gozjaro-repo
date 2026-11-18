@@ -13,7 +13,14 @@ build_depends = ["autoconf", "automake", "libgc"]
 urls = [
     { url = "https://snapshot.debian.org/archive/debian/20240101T000000Z/pool/main/w/w3m/w3m_0.5.3.orig.tar.gz", sha256 = "e994d263f2fd2c22febfbe45103526e00145a7674a0fda79c822b97c2770a9e3" },
 ]
-patches = []
+patches = [
+    "01-rename-file-handle.patch",
+    "02-gc-warn-proc-void.patch",
+]
+# 01: w3m's internal 'struct file_handle' collides with glibc's struct file_handle
+#     (open_by_handle_at, glibc>=2.28); rename the w3m one to w3m_file_handle.
+# 02: modern libgc GC_set_warn_proc returns void; w3m 0.5.3 assigned its (old)
+#     return value, which is an invalid use of a void expression.
 
 [build]
 system = "raw"

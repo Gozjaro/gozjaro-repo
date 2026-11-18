@@ -1,0 +1,11 @@
+--- a/main.c
++++ b/main.c
+@@ -833,7 +833,7 @@
+     mySignal(SIGPIPE, SigPipe);
+ #endif
+ 
+-    orig_GC_warn_proc = GC_set_warn_proc(wrap_GC_warn_proc);
++    GC_set_warn_proc(wrap_GC_warn_proc);
+     err_msg = Strnew();
+     if (load_argc == 0) {
+ 	/* no URL specified */
