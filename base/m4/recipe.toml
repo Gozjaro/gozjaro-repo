@@ -9,7 +9,9 @@ build_depends = []
 urls = [
     { url = "https://mirrors.kernel.org/gnu/m4/m4-$VERSION.tar.xz", sha256 = "e236ea3a1ccf5f6c270b1c4bb60726f371fa49459a8eaaebc90b216b328daf2b" },
 ]
-patches = []
+patches = [
+    "patches/m4-1.4.20-gcc16-c23-overloads.patch",
+]
 
 [build]
 system = "raw"

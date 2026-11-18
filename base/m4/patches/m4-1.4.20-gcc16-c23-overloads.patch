@@ -1,0 +1,75 @@
+diff -ruN a/lib/intprops-internal.h b/lib/intprops-internal.h
+--- a/lib/intprops-internal.h	2025-04-01 23:14:24.000000000 +0000
++++ b/lib/intprops-internal.h	2026-11-18 20:23:34.971498582 +0000
+@@ -189,7 +189,7 @@
+    For now, assume GCC < 14 and all Clang versions generate bogus
+    warnings for _Generic.  This matters only for compilers that
+    lack relevant builtins.  */
+-#if (__GNUC__ && __GNUC__ < 14) || defined __clang__
++#if (__GNUC__ && __GNUC__ < 16) || defined __clang__
+ # define _GL__GENERIC_BOGUS 1
+ #else
+ # define _GL__GENERIC_BOGUS 0
+diff -ruN a/lib/stdlib.in.h b/lib/stdlib.in.h
+--- a/lib/stdlib.in.h	2025-05-10 12:41:50.000000000 +0000
++++ b/lib/stdlib.in.h	2026-11-18 20:23:34.970976740 +0000
+@@ -172,7 +172,7 @@
+    (a pointer) must not be NULL if the argument NI (an integer) is != 0.  */
+ /* Applies to: functions.  */
+ #ifndef _GL_ATTRIBUTE_NONNULL_IF_NONZERO
+-# if __GNUC__ >= 15 && !defined __clang__
++# if 0 /* GozJaro: C23 overload machinery is clang-only; GCC cannot parse _Generic declarators */
+ #  define _GL_ATTRIBUTE_NONNULL_IF_NONZERO(np, ni) \
+      __attribute__ ((__nonnull_if_nonzero__ (np, ni)))
+ # else
+@@ -236,7 +236,7 @@
+ 
+ 
+ /* Declarations for ISO C N3322.  */
+-#if defined __GNUC__ && __GNUC__ >= 15 && !defined __clang__
++#if 0 /* GozJaro: C23 overload redeclarations are clang-only; GCC cannot parse _Generic in declarators */
+ _GL_EXTERN_C void *bsearch (const void *__key,
+                             const void *__base, size_t __nmemb, size_t __size,
+                             int (*__compare) (const void *, const void *))
+diff -ruN a/lib/string.in.h b/lib/string.in.h
+--- a/lib/string.in.h	2025-05-10 12:41:50.000000000 +0000
++++ b/lib/string.in.h	2026-11-18 20:23:34.970555263 +0000
+@@ -120,7 +120,7 @@
+    (a pointer) must not be NULL if the argument NI (an integer) is != 0.  */
+ /* Applies to: functions.  */
+ #ifndef _GL_ATTRIBUTE_NONNULL_IF_NONZERO
+-# if __GNUC__ >= 15 && !defined __clang__
++# if 0 /* GozJaro: C23 overload machinery is clang-only; GCC cannot parse _Generic declarators */
+ #  define _GL_ATTRIBUTE_NONNULL_IF_NONZERO(np, ni) \
+      __attribute__ ((__nonnull_if_nonzero__ (np, ni)))
+ # else
+@@ -213,7 +213,7 @@
+ 
+ 
+ /* Declarations for ISO C N3322.  */
+-#if defined __GNUC__ && __GNUC__ >= 15 && !defined __clang__
++#if 0 /* GozJaro: C23 overload redeclarations are clang-only; GCC cannot parse _Generic in declarators */
+ _GL_EXTERN_C void *memcpy (void *__dest, const void *__src, size_t __n)
+   _GL_ATTRIBUTE_NONNULL_IF_NONZERO (1, 3)
+   _GL_ATTRIBUTE_NONNULL_IF_NONZERO (2, 3);
+diff -ruN a/lib/wchar.in.h b/lib/wchar.in.h
+--- a/lib/wchar.in.h	2025-05-10 12:41:50.000000000 +0000
++++ b/lib/wchar.in.h	2026-11-18 20:23:34.971318555 +0000
+@@ -144,7 +144,7 @@
+    (a pointer) must not be NULL if the argument NI (an integer) is != 0.  */
+ /* Applies to: functions.  */
+ #ifndef _GL_ATTRIBUTE_NONNULL_IF_NONZERO
+-# if __GNUC__ >= 15 && !defined __clang__
++# if 0 /* GozJaro: C23 overload machinery is clang-only; GCC cannot parse _Generic declarators */
+ #  define _GL_ATTRIBUTE_NONNULL_IF_NONZERO(np, ni) \
+      __attribute__ ((__nonnull_if_nonzero__ (np, ni)))
+ # else
+@@ -279,7 +279,7 @@
+ 
+ 
+ /* Declarations for ISO C N3322.  */
+-#if defined __GNUC__ && __GNUC__ >= 15 && !defined __clang__
++#if 0 /* GozJaro: C23 overload redeclarations are clang-only; GCC cannot parse _Generic in declarators */
+ _GL_EXTERN_C wchar_t *wmemcpy (wchar_t *__dest, const wchar_t *__src, size_t __n)
+   _GL_ATTRIBUTE_NONNULL_IF_NONZERO (1, 3)
+   _GL_ATTRIBUTE_NONNULL_IF_NONZERO (2, 3);
