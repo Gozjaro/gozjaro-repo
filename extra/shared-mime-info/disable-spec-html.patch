@@ -1,0 +1,15 @@
+--- a/data/meson.build
++++ b/data/meson.build
+@@ -18,7 +18,11 @@
+   install_dir : get_option('datadir') / 'gettext/its'
+ )
+ 
+-if xmlto.found()
++# GozJaro: skip the optional spec-html target. Offline xmlto validation of
++# the shipped DocBook 4.1.2 source fails in the minimal tree (xmllint's
++# --postvalid pass does not resolve the DTD from the XML catalog); the
++# MIME data itself is unaffected.
++if xmlto.found() and false
+     custom_target('shared-mime-info-spec-html',
+         input : 'shared-mime-info-spec.xml',
+         output: 'shared-mime-info-spec-html',
