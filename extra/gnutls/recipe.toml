@@ -1,6 +1,6 @@
 [package]
 name = "gnutls"
-version = "3.8.8"
+version = "3.8.13"
 release = 1
 desc = "A library which provides a secure layer over a reliable transport layer"
 license = "GPL-3.0-or-later"
@@ -8,16 +8,17 @@ depends = ["nettle", "libtasn1", "p11-kit", "zlib"]
 build_depends = []
 
 [source]
-urls = [
-    { url = "https://www.gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-3.8.8.tar.xz" , sha256 = "ac4f020e583880b51380ed226e59033244bc536cad2623f2e26f5afa2939d8fb"},
-]
+# ftp.gnupg.org no longer hosts release tarballs — use the upstream tag via git.
+# 3.8.13 (latest) builds against nettle 4.x; 3.8.8 predated the nettle/sha.h
+# consolidation and breaks on our wide-only, nettle-4 tree.
+git = "git+https://github.com/gnutls/gnutls.git#v3.8.13"
 patches = []
 
 [build]
 system = "raw"
 steps = [
     "# converted from gozjaro-pkgs PKGBUILD gnutls (build + package)",
-    "# source top dir \"gnutls-3.8.8\" is stripped by the builder — paths below are flat",
+    "# git source: checkout root is the source root (flat, no top dir)",
     "",
     "cd \".\"",
     "./configure \\",
