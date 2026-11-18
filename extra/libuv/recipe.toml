@@ -9,7 +9,7 @@ build_depends = []
 
 [source]
 urls = [
-    { url = "https://github.com/libuv/libuv/releases/download/v1.53.0/libuv-1.53.0.tar.gz", sha256 = "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5" },
+    { url = "https://codeload.github.com/libuv/libuv/tar.gz/refs/tags/v1.53.0", sha256 = "279f3f67a24bb9921fe999ca6cd5e332fade8d515873ef9ba054b70e70a31d9e" },
 ]
 patches = []
 
