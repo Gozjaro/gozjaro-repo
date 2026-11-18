@@ -20,6 +20,12 @@ system = "raw"
 steps = [
     "# autotools, tarball source (top dir xmlto-0.0.29 stripped by the builder)",
     "",
+    "# The format scripts hardcode http://docbook.sourceforge.net/release/xsl/current",
+    "# (dead domain). libxslt's xsl:import never consults XML catalogs, so repoint",
+    "# them at the local docbook-xsl install; DTD validation still uses the catalog",
+    "# via the XML_CATALOGS default this package now exports.",
+    "sed -i 's|http://docbook.sourceforge.net/release/xsl/current|file:///usr/share/xml/docbook/xsl/current|g' format/docbook/* format/xhtml1/* format/fo/*",
+    "",
     "autoreconf -fi",
     "./configure --prefix=/usr",
     "# build only the programs: the man-page target xsltproc-imports docbook XSL from",
