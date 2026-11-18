@@ -192,3 +192,4 @@ w3m
 libgc
 gozjaro-wallpapers
 gozjaro-logo
+gozjaro-installer

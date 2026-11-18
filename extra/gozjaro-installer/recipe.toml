@@ -1,0 +1,33 @@
+[package]
+name = "gozjaro-installer"
+version = "v4"
+release = 1
+desc = "GozJaro disk installer (rust, glibc 2.31) + chroot initramfs builder script"
+license = "MIT"
+depends = []
+build_depends = []
+
+[source]
+# GHA release binary (debian:bullseye glibc 2.31 == the GozJaro LFS target's
+# glibc) + the twin initramfs builder script exec'd by the binary at
+# /usr/sbin/gozjaro-build-initramfs (stage-85 twin). Pinned to tag installer-v4.
+urls = [
+    { url = "https://github.com/Gozjaro/gozjaro-installer-rs/releases/download/installer-v4/gozjaro-install-x86_64-linux", sha256 = "a43357321ae50978ac4c33f30f8fbc4df53cda4e47256481c448d77e234fefd4" },
+    { url = "https://raw.githubusercontent.com/Gozjaro/gozjaro-installer-rs/installer-v4/scripts/gozjaro-build-initramfs.sh", sha256 = "47e22852a813ffd45aee6e49bfbf2467bf9ff0e1b8df58550b6142815516b023" },
+]
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# binary distribution package: install the GHA-built installer + its initramfs builder twin",
+    "install -Dm755 \\\"gozjaro-install-x86_64-linux\\\" \\\"$DESTDIR/usr/bin/gozjaro-install\\\"",
+    "install -Dm755 \\\"gozjaro-build-initramfs.sh\\\" \\\"$DESTDIR/usr/sbin/gozjaro-build-initramfs\\\"",
+    "install -d -m755 \\\"$DESTDIR/usr/share/licenses/gozjaro-installer\\\"",
+    "echo \\\"gozjaro-installer v4 (installer-v4, GozJaro/gozjaro-installer-rs @ 485bdef)\\\" > \\\"$DESTDIR/usr/share/licenses/gozjaro-installer/COPYING\\\"",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []
