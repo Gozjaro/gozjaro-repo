@@ -76,11 +76,18 @@ if [[ ! -e "$merged/usr/bin/gozpak" ]]; then
             -o "$default_gpkg.part"
         mv -- "$default_gpkg.part" "$default_gpkg"
     fi
-    # .gpkg layout is ./rootfs/... — strip the prefix so the payload
-    # lands in $merged (the check above and the chroot PATH both
-    # expect the installed location /usr/bin/gozpak, not
-    # $merged/rootfs/usr/bin/gozpak).
-    tar --zstd -xf "$GOZPAK_GPKG" -C "$merged" --strip-components=1
+    # .gpkg layout is ./rootfs/... — extract to a temp dir and copy
+    # the payload into $merged (the existence check above and the
+    # chroot PATH both expect /usr/bin/gozpak, not
+    # $merged/rootfs/usr/bin/gozpak). Handle a flat payload too.
+    tmpx=$(mktemp -d)
+    tar --zstd -xf "$GOZPAK_GPKG" -C "$tmpx"
+    if [[ -d "$tmpx/rootfs" ]]; then
+        cp -a -- "$tmpx/rootfs/." "$merged/"
+    else
+        cp -a -- "$tmpx/." "$merged/"
+    fi
+    rm -rf -- "$tmpx"
 fi
 
 build_path=/usr/bin:/usr/sbin
