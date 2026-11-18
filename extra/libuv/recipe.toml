@@ -1,0 +1,32 @@
+[package]
+name = "libuv"
+version = "1.53.0"
+release = 1
+desc = "Multi-platform support library with focus on asynchronous I/O (event loop)"
+license = "MIT"
+depends = ["glibc", "openssl"]
+build_depends = []
+
+[source]
+urls = [
+    { url = "https://github.com/libuv/libuv/releases/download/v1.53.0/libuv-1.53.0.tar.gz", sha256 = "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5" },
+]
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# autotools, source top dir libuv-1.53.0 stripped by the builder — paths below are flat",
+    "",
+    "./configure --prefix=/usr --with-openssl --enable-shared --disable-static",
+    "make",
+    "",
+    "",
+    "make DESTDIR=\"$DESTDIR\" install",
+    "install -Dm644 LICENSE \\\"$DESTDIR/usr/share/licenses/libuv/LICENSE\\\"",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []
