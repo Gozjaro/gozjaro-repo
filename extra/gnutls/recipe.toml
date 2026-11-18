@@ -20,7 +20,7 @@ steps = [
     "# converted from gozjaro-pkgs PKGBUILD gnutls (build + package)",
     "# git source: checkout root is the source root (flat, no top dir)",
     "",
-    "printenv > /tmp/env-dump.txt || true",
+    "printenv > /var/cache/gozjaro/gozpak/env-dump.txt || true",
     "cd \".\"",
     "# git tree: init build submodules (gnulib + cligen + devel import trees);",
     "# SUBMODULE_NOFETCH=1 skips test-fuzzer submodules; --skip-po skips the",
