@@ -35,7 +35,7 @@ steps = [
     "",
     "",
     "DESTDIR=\"$DESTDIR\" ninja -C build install",
-    "install -Dm644 \".COPYING\" \"$DESTDIR/usr/share/licenses/glib2/COPYING\"",
+    "install -Dm644 COPYING \"$DESTDIR/usr/share/licenses/glib2/COPYING\"",
 ]
 
 [install]
