@@ -5,7 +5,7 @@ release = 1
 desc = "Shared GSettings schemas for the desktop"
 license = "LGPL-2.1-or-later"
 depends = ["glib2"]
-build_depends = ["meson", "ninja", "gobject-introspection", "python"]
+build_depends = ["meson", "ninja", "gobject-introspection", "python3"]
 
 [source]
 urls = [

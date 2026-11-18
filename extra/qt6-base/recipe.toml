@@ -5,7 +5,7 @@ release = 1
 desc = "A cross-platform application and UI framework (Qt6)"
 license = "GPL-3.0-or-later"
 depends = ["glib2", "openssl", "libxkbcommon", "dbus", "libdrm", "mesa", "zlib", "sqlite"]
-build_depends = ["cmake", "ninja", "python", "wayland", "wayland-protocols", "libxkbcommon", "mesa", "libdrm", "openssl"]
+build_depends = ["cmake", "ninja", "python3", "wayland", "wayland-protocols", "libxkbcommon", "mesa", "libdrm", "openssl"]
 
 [source]
 urls = [

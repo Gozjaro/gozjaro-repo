@@ -5,7 +5,7 @@ release = 1
 desc = "X11 client-side library"
 license = "MIT"
 depends = ["libxau", "libxdmcp"]
-build_depends = ["xcb-proto", "libxau", "libxdmcp", "python"]
+build_depends = ["xcb-proto", "libxau", "libxdmcp", "python3"]
 
 [source]
 urls = [

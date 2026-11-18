@@ -52,7 +52,6 @@ freetype2
 libinput
 gnutls
 nginx
-python
 libice
 libxau
 libxdmcp

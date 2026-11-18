@@ -5,7 +5,7 @@ release = 1
 desc = "Lists of the country, language, and currency names"
 license = "LGPL-2.1-only"
 depends = []
-build_depends = ["git", "meson", "python"]
+build_depends = ["git", "meson", "python3"]
 
 [source]
 git = "git+https://salsa.debian.org/iso-codes-team/iso-codes#v4.20.1"

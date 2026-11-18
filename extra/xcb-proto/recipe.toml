@@ -5,7 +5,7 @@ release = 1
 desc = "XML-XCB protocol descriptions"
 license = "MIT"
 depends = []
-build_depends = ["python"]
+build_depends = ["python3]
 
 [source]
 urls = [

@@ -5,7 +5,7 @@ release = 1
 desc = "XML C parser and toolkit"
 license = "MIT"
 depends = ["xz", "zlib"]
-build_depends = ["python"]
+build_depends = ["python3]
 
 [source]
 urls = [

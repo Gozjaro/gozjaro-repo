@@ -5,7 +5,7 @@ release = 1
 desc = "Low level core library"
 license = "LGPL-2.1-or-later"
 depends = ["pcre2", "libffi", "zlib"]
-build_depends = ["meson", "ninja", "pcre2", "libffi", "python"]
+build_depends = ["meson", "ninja", "pcre2", "libffi", "python3"]
 
 [source]
 urls = [

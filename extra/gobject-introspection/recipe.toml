@@ -4,8 +4,8 @@ version = "1.82.0"
 release = 1
 desc = "Introspection system for GObject-based libraries"
 license = "LGPL-2.1-or-later"
-depends = ["glib2", "python"]
-build_depends = ["meson", "ninja", "glib2", "python", "cairo"]
+depends = ["glib2", "python3"]
+build_depends = ["meson", "ninja", "glib2", "python3", "cairo"]
 
 [source]
 urls = [

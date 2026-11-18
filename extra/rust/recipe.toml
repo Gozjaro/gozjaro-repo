@@ -5,7 +5,7 @@ release = 1
 desc = "Systems programming language focused on safety and performance"
 license = "MIT"
 depends = []
-build_depends = ["python", "ninja", "cmake", "curl"]
+build_depends = ["python3, "ninja", "cmake", "curl"]
 
 [source]
 urls = [
