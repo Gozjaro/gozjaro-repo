@@ -41,7 +41,8 @@ steps = [
     "",
     "cd \".\"",
     "make DESTDIR=\"$DESTDIR\" install",
-    "install -Dm644 Copyright.txt \"$DESTDIR/usr/share/licenses/cmake/LICENSE\"",
+    "# cmake 4.x ships LICENSE.rst (Copyright.txt was removed)",
+    "install -Dm644 LICENSE.rst \"$DESTDIR/usr/share/licenses/cmake/LICENSE\"",
 ]
 
 [install]
