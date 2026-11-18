@@ -1,14 +1,14 @@
 [package]
 name = "gozpak"
 version = "6.0.0"
-release = 1
+release = 2
 desc = "GozJaro package manager (Rust; self-management meta package)"
 license = "MIT"
 depends = []
 build_depends = ["rust"]
 
 [source]
-git = "git+https://github.com/Gozjaro/gozpak.git#3be2bd35b819fca535dfc380e5d19b07e88d5bd3"
+git = "git+https://github.com/Gozjaro/gozpak.git#30c4244e9073ecdd2aec206515f19215140e9f00"
 patches = []
 
 [build]
