@@ -22,10 +22,12 @@ steps = [
     "",
     "autoreconf -fi",
     "./configure --prefix=/usr",
-    "make",
+    "# build only the programs: the man-page target xsltproc-imports docbook XSL from",
+    "# docbook.sourceforge.net (dead domain, offline build fails); install-exec skips man",
+    "make xmlif",
     "",
     "",
-    "make DESTDIR=\"$DESTDIR\" install",
+    "make DESTDIR=\"$DESTDIR\" install-exec",
     "install -Dm644 COPYING \"$DESTDIR/usr/share/licenses/xmlto/COPYING\"",
 ]
 
