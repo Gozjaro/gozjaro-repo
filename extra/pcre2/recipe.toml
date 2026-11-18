@@ -35,7 +35,7 @@ steps = [
     "",
     "cd \".\"",
     "make DESTDIR=\"$DESTDIR\" install",
-    "install -Dm644 LICENCE \"$DESTDIR/usr/share/licenses/pcre2/LICENCE\"",
+    "install -Dm644 LICENCE.md \"$DESTDIR/usr/share/licenses/pcre2/LICENCE.md\"",
 ]
 
 [install]

@@ -16,7 +16,7 @@ system = "raw"
 steps = [
     "# converted from gozjaro-pkgs PKGBUILD lz4 (build + package)",
     "",
-    "meson setup --prefix=/usr --buildtype=plain lz4/build/meson build",
+    "meson setup --prefix=/usr --buildtype=plain build/meson build",
     "meson configure build -Dcontrib=true -Dexamples=true -Dprograms=true",
     "meson compile -C build",
     "",
