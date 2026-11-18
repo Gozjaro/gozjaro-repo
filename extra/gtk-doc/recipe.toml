@@ -1,0 +1,32 @@
+[package]
+name = "gtk-doc"
+version = "1.32"
+release = 1
+desc = "Toolkit for generating API references from source code comments"
+license = "GPL-3.0-or-later"
+depends = ["glibc", "perl"]
+build_depends = ["autoconf", "automake"]
+
+[source]
+git = "git+https://github.com/GNOME/gtk-doc.git#GTK_DOC_1_32"
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# git source: checkout root is the source root (flat, no top dir)",
+    "",
+    "cd \".\"",
+    "autoreconf -fi",
+    "./configure --prefix=/usr",
+    "make",
+    "",
+    "",
+    "cd \".\"",
+    "make DESTDIR=\"$DESTDIR\" install",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []
