@@ -99,7 +99,7 @@ provides = [
 
 [build]
 system = "raw"
-steps = []
+steps = ["true"]
 
 [install]
 post = []
