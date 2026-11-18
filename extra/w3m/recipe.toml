@@ -41,7 +41,6 @@ steps = [
     "",
     "",
     "make DESTDIR=\"$DESTDIR\" install",
-    "install -Dm644 COPYING \"$DESTDIR/usr/share/licenses/w3m/COPYING\"",
 ]
 
 [install]
