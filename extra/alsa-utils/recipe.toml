@@ -25,7 +25,7 @@ steps = [
     "--disable-alsaconf \\",
     "--disable-bat \\",
     "--disable-xmlto \\",
-    "--with-curses=ncurses",
+    "--with-curses=ncursesw",
     "make",
     "",
     "",

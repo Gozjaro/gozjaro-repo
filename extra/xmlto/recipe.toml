@@ -1,0 +1,31 @@
+[package]
+name = "xmlto"
+version = "0.0.29"
+release = 1
+desc = "XML-to-anything converter (front-end for DocBook/DTD-based XML conversion)"
+license = "GPL-2.0-or-later"
+depends = ["glibc"]
+build_depends = ["autoconf", "automake"]
+
+[source]
+git = "git+https://pagure.io/xmlto.git#0.0.29"
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# autotools, git source (source root = checkout root)",
+    "",
+    "autoreconf -fi",
+    "./configure --prefix=/usr",
+    "make",
+    "",
+    "",
+    "make DESTDIR=\"$DESTDIR\" install",
+    "install -Dm644 COPYING \"$DESTDIR/usr/share/licenses/xmlto/COPYING\"",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []
