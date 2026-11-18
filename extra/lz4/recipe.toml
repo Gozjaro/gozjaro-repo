@@ -16,12 +16,12 @@ system = "raw"
 steps = [
     "# converted from gozjaro-pkgs PKGBUILD lz4 (build + package)",
     "",
-    "meson setup --prefix=/usr --buildtype=plain build/meson build",
-    "meson configure build -Dcontrib=true -Dexamples=true -Dprograms=true",
-    "meson compile -C build",
+    "meson setup --prefix=/usr --buildtype=plain build/meson mbuild",
+    "meson configure mbuild -Dcontrib=true -Dexamples=true -Dprograms=true",
+    "meson compile -C mbuild",
     "",
     "",
-    "meson install -C build --destdir \"$DESTDIR\"",
+    "meson install -C mbuild --destdir \"$DESTDIR\"",
 ]
 
 [install]
