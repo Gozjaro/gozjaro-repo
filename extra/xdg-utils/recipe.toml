@@ -16,6 +16,12 @@ system = "raw"
 steps = [
     "# converted from gozjaro-pkgs PKGBUILD xdg-utils (build + package)",
     "",
+    "# LFS xmllint --postvalid does not resolve the doctype DTD from the XML catalog",
+    "# (verified: XML_CATALOGS set, validation still fails; plain --noout works), so",
+    "# skip validation — the xml sources are upstream-released; the XSL transform still",
+    "# resolves docbook.xsl through the catalog that xmlto now exports by default.",
+    "XMLTO=\"/usr/bin/xmlto --skip-validation\"",
+    "export XMLTO",
     "./configure --prefix=/usr",
     "make",
     "",
