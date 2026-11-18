@@ -20,8 +20,10 @@ system = "raw"
 steps = [
     "# converted from gozjaro-pkgs PKGBUILD w3m (build + package)",
     "# plain-text http browser: no ssl (offline tree), no image handlers.",
+    "# the release tarball ships a pre-generated configure; do NOT run autoreconf",
+    "# (it regenerates aclocal.m4 and loses the gettext macros w3m's",
+    "# configure.ac uses, e.g. AM_LANGINFO_CODESET).",
     "",
-    "autoreconf -fi",
     "./configure --prefix=/usr",
     "make",
     "",
