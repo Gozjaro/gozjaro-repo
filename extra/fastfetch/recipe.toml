@@ -1,7 +1,7 @@
 [package]
 name = "fastfetch"
 version = "2.71.0"
-release = 1
+release = 2
 desc = "A fast system info tool written in C"
 license = "MIT"
 depends = []
@@ -40,14 +40,18 @@ steps = [
 "     \\        /",
 "      \\______/",
 "EOF",
-"# system config: /etc/xdg/fastfetch is scanned before user config (XDG_CONFIG_DIRS),",
-"# so plain `fastfetch` shows the dog by default; CLI flags still override.",
+"# system config: 2.x JSON-config semantics \u2014 a config file REPLACES the default module list,",
+"# so ship the default modules (29, from 2.71.0 --gen-config) + the dog logo (full path: the",
+"# system logo dir is NOT in the runtime name-lookup path) + colors. /etc/xdg is scanned",
+"# (XDG_CONFIG_DIRS default) before user config; CLI flags still override.",
 "install -d -m755 \"$DESTDIR/etc/xdg/fastfetch\"",
 "cat > \"$DESTDIR/etc/xdg/fastfetch/config.jsonc\" <<'EOF'",
-"// GozJaro fastfetch system defaults (branding)",
+"// GozJaro fastfetch system defaults (branding: dog logo + default module set)",
 "{",
+"  \"$schema\": \"https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json\",",
+"  \"modules\": [\"title\", \"separator\", \"os\", \"host\", \"kernel\", \"uptime\", \"packages\", \"shell\", \"display\", \"de\", \"wm\", \"wmtheme\", \"theme\", \"icons\", \"font\", \"cursor\", \"terminal\", \"terminalfont\", \"cpu\", \"gpu\", \"memory\", \"swap\", \"disk\", \"localip\", \"battery\", \"poweradapter\", \"locale\", \"break\", \"colors\"],",
 "  \"logo\": {",
-"    \"source\": \"gozjaro\",",
+"    \"source\": \"/usr/share/fastfetch/logos/gozjaro.txt\",",
 "    \"color\": { \"1\": \"magenta\", \"2\": \"blue\", \"3\": \"default\" }",
 "  }",
 "}",
