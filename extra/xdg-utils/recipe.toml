@@ -16,7 +16,7 @@ system = "raw"
 steps = [
     "# converted from gozjaro-pkgs PKGBUILD xdg-utils (build + package)",
     "",
-    "./configure --prefix=/usr",
+    "./configure --prefix=/usr XMLTO=\"xmlto --skip-validation\"",
     "make",
     "",
     "",
