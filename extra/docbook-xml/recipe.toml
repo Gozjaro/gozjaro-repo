@@ -24,8 +24,15 @@ steps = [
     "    cp -a \"$v\" \"$DESTDIR/usr/share/xml/docbook/dtd/xml/${v#docbook-}\"",
     "done",
     "install -d -m755 \"$DESTDIR/etc/xml\"",
-    "cp /etc/xml/catalog \"$DESTDIR/etc/xml/catalog\" 2>/dev/null || touch \"$DESTDIR/etc/xml/catalog\"",
-    "xmlcatalog -v --no-update-indices --add \"PUBLIC\" \"-//OASIS//DTD DocBook XML V4.3//EN\" \"file:///usr/share/xml/docbook/dtd/xml/4.3/docbookx.dtd\" \"$DESTDIR/etc/xml/catalog\"",
+    "cat > \"$DESTDIR/etc/xml/catalog\" <<'EOF'",
+    "<?xml version=\"1.0\"?>",
+    "<!DOCTYPE catalog PUBLIC \"-//OASIS//DTD Catalog V1.0//EN\" \"http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd\">",
+    "<catalog xmlns=\"http://www.w3.org/2005/xmlcatalog\">",
+    "  <public id=\"-//OASIS//DTD DocBook XML V4.3//EN\" uri=\"file:///usr/share/xml/docbook/dtd/xml/4.3/docbookx.dtd\"/>",
+    "  <rebind uriName=\"http://docbook.sourceforge.net/release/xsl/current\" uri=\"file:///usr/share/xml/docbook/xsl/current\"/>",
+    "  <rebind uriName=\"http://docbook.sourceforge.net/release/xsl/current/\" uri=\"file:///usr/share/xml/docbook/xsl/current/\"/>",
+    "</catalog>",
+    "EOF",
 ]
 
 [install]
