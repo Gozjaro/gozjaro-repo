@@ -1,0 +1,15 @@
+--- a/xmlto.in
++++ b/xmlto.in
+@@ -24,6 +24,12 @@
+ TAIL=@TAIL@               # a tail that supports -n (posix)
+ GREP=@GREP@               # GNU grep, for searching patterns
+ SED=@SED@                 # GNU sed, for modification of patterns
+ 
++
++# GozJaro: this distribution's libxml2/xsltproc have no compiled-in default
++# XML catalog path, so point at the system catalog explicitly (callers that
++# already set XML_CATALOGS keep their value).
++: ${XML_CATALOGS:=/etc/xml/catalog}
++export XML_CATALOGS
+ version () {
+   echo "@PACKAGE@ version @VERSION@"

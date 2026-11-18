@@ -13,7 +13,7 @@ urls = [
 ]
 # upstream git (pagure) is dumb-http only — the debian orig tarball is byte-source-identical
 # to tag 0.0.29 and downloads as a plain HTTPS file, no git needed.
-patches = []
+patches = ["xmlto-default-catalog.patch"]
 
 [build]
 system = "raw"

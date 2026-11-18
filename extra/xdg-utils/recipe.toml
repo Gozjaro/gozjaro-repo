@@ -16,12 +16,6 @@ system = "raw"
 steps = [
     "# converted from gozjaro-pkgs PKGBUILD xdg-utils (build + package)",
     "",
-    "# LFS xmllint --postvalid ignores XML catalogs offline, so xmlto validation of the",
-    "# shipped docbook sources dies on the 4.1.2 DTD; xmlto's own error message points at",
-    "# --skip-validation. AC_PATH_PROG only keeps a user value that is an ABSOLUTE path",
-    "# (bare program names get re-probed on PATH and clobbered), so qualify it.",
-    "XMLTO=\"/usr/bin/xmlto --skip-validation\"",
-    "export XMLTO",
     "./configure --prefix=/usr",
     "make",
     "",
