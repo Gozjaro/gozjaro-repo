@@ -1,0 +1,28 @@
+[package]
+name = "xorg-macros"
+version = "1.17.0"
+release = 1
+desc = "X.Org autoconf macros (pkg-config entry pointing at libxcb's m4 dir)"
+license = "MIT"
+depends = ["libxcb"]
+build_depends = []
+
+[source]
+urls = []
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# no upstream source: install the pkg-config file autotools packages use",
+    "# to locate the X.Org m4 macros shipped with libxcb",
+    "",
+    "install -d \"$DESTDIR/usr/share/pkgconfig\"",
+    "printf 'Name: xorg-macros\\nDescription: X.Org Macros\\nVersion: 1.17.0\\nURL: https://www.x.org/\\nCflags: -I/usr/share/pkgconfig\\n' > xorg-macros.pc",
+    "install -Dm644 xorg-macros.pc \\\"$DESTDIR/usr/share/pkgconfig/xorg-macros.pc\\\"",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

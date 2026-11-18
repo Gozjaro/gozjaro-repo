@@ -71,6 +71,7 @@ lcms2
 ttf-dejavu
 libxslt
 wayland
+xorg-macros
 libxcb
 cairo
 shared-mime-info
