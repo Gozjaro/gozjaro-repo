@@ -1,0 +1,33 @@
+[package]
+name = "docbook-xsl"
+version = "1.79.1"
+release = 1
+desc = "DocBook XSL stylesheets"
+license = "Custom"
+depends = []
+build_depends = ["libxml2"]
+
+[source]
+url = "https://downloads.sourceforge.net/project/docbook/xsl/1.79.1/docbook-xsl-1.79.1.tar.bz2"
+sha256 = "725f452e12b296956e8bfb876ccece71eeecdd14b94f667f3ed9091761a4a968"
+strip_top_dir = true
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# data package: install XSL runtime tree + register catalog redirect",
+    "cd \".\"",
+    "install -d -m755 \"$DESTDIR/usr/share/xml/docbook/xsl/current\"",
+    "for d in assembly common epub epub3 fo html htmlhelp javahelp lib manpages params slides template webhelp website xhtml xhtml5; do cp -a \"$d\" \"$DESTDIR/usr/share/xml/docbook/xsl/current/\"; done",
+    "cp -a catalog.xml VERSION.xsl \"$DESTDIR/usr/share/xml/docbook/xsl/current/\"",
+    "install -d -m755 \"$DESTDIR/etc/xml\"",
+    "test -f \"$DESTDIR/etc/xml/catalog\" || touch \"$DESTDIR/etc/xml/catalog\"",
+    "xmlcatalog -v --no-update-indices --add \"http://docbook.sourceforge.net/release/xsl/current\" \"/usr/share/xml/docbook/xsl/current\" \"$DESTDIR/etc/xml/catalog\"",
+    "xmlcatalog -v --no-update-indices --add \"http://docbook.sourceforge.net/release/xsl/current/\" \"/usr/share/xml/docbook/xsl/current/\" \"$DESTDIR/etc/xml/catalog\"",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

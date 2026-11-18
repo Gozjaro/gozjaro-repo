@@ -1,0 +1,33 @@
+[package]
+name = "docbook-xml"
+version = "4.5"
+release = 1
+desc = "DocBook XML DTDs (4.0-4.5)"
+license = "Custom"
+depends = []
+build_depends = ["libxml2"]
+
+[source]
+url = "https://deb.debian.org/debian/pool/main/d/docbook-xml/docbook-xml_4.5.orig.tar.gz"
+sha256 = "b0f8edcf697f5318e63dd98c9a931f3fee167af0805ba441db372e0f17b2a44f"
+strip_top_dir = true
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# data package: install DTDs + register catalog",
+    "cd \".\"",
+    "for v in docbook-4.0 docbook-4.1.2 docbook-4.2 docbook-4.3 docbook-4.4 docbook-4.5; do",
+    "    install -d -m755 \"$DESTDIR/usr/share/xml/docbook/dtd/xml/${v#docbook-}\"",
+    "    cp -a \"$v\" \"$DESTDIR/usr/share/xml/docbook/dtd/xml/${v#docbook-}\"",
+    "done",
+    "install -d -m755 \"$DESTDIR/etc/xml\"",
+    "test -f \"$DESTDIR/etc/xml/catalog\" || touch \"$DESTDIR/etc/xml/catalog\"",
+    "xmlcatalog -v --no-update-indices --add \"PUBLIC\" \"-//OASIS//DTD DocBook XML V4.3//EN\" \"file:///usr/share/xml/docbook/dtd/xml/4.3/docbookx.dtd\" \"$DESTDIR/etc/xml/catalog\"",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []
