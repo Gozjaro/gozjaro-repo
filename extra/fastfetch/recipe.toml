@@ -1,7 +1,7 @@
 [package]
 name = "fastfetch"
 version = "v1.0.1"
-release = 1
+release = 2
 desc = "A fast system info tool written in C"
 license = "MIT"
 depends = []
@@ -27,8 +27,36 @@ steps = [
     "cmake --build build",
     "",
     "",
-    "DESTDIR=\"$DESTDIR\" cmake --install build",
-    "install -Dm644 \"LICENSE\" \"$DESTDIR/usr/share/licenses/fastfetch/LICENSE\"",
+    "DESTDIR=\\\"$DESTDIR\\\" cmake --install build",
+    "install -Dm644 \\\"LICENSE\\\" \\\"$DESTDIR/usr/share/licenses/fastfetch/LICENSE\\\"",
+    "",
+    "# GozJaro branding: ship the ASCII dog logo + system-wide fastfetch defaults",
+    "# logo file (fastfetch $1/$2/$3 color placeholders: ## magenta, %% blue)",
+    "install -d -m755 \\\"$DESTDIR/usr/share/fastfetch/logos\\\"",
+    "cat > \\\"$DESTDIR/usr/share/fastfetch/logos/gozjaro.txt\\\" <<'EOF'",
+    " /\\              /\\",
+    "/$1##$3\\            /$2%%$3\\",
+    "|$1###$3\\          /$2%%%$3|",
+    "|$1####$3\\________/$2%%%%$3|",
+    "|        $1<>$3        |",
+    "|                  |",
+    "|   \\_\\      /_/   |",
+    " \\                /",
+    "  \\              /",
+    "   \\            /",
+    "    \\    <>    /",
+    "     \\        /",
+    "      \\______/",
+    "EOF",
+    "# system config: plain `fastfetch` shows the GozJaro dog by default",
+    "# (users can override via ~/.config/fastfetch/config.conf or CLI flags)",
+    "install -d -m755 \\\"$DESTDIR/etc/fastfetch\\\"",
+    "cat > \\\"$DESTDIR/etc/fastfetch/config.conf\\\" <<'EOF'",
+    "# GozJaro fastfetch system defaults (branding)",
+    "--logo /usr/share/fastfetch/logos/gozjaro.txt",
+    "--logo-color-1 magenta",
+    "--logo-color-2 blue",
+    "EOF",
 ]
 
 [install]
