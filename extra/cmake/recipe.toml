@@ -1,6 +1,6 @@
 [package]
 name = "cmake"
-version = "3.31.6"
+version = "4.5.0"
 release = 1
 desc = "A cross-platform open-source make system"
 license = "BSD-3-Clause"
@@ -9,7 +9,7 @@ build_depends = []
 
 [source]
 urls = [
-    { url = "https://www.cmake.org/files/v3.31/cmake-3.31.6.tar.gz" , sha256 = "653427f0f5014750aafff22727fb2aa60c6c732ca91808cfb78ce22ddd9e55f0"},
+    { url = "https://www.cmake.org/files/v4.5/cmake-4.5.0.tar.gz" , sha256 = "424352d6133e8455e020da787008e8dc67abb18820af3532572ab35657e49213"},
 ]
 patches = []
 
@@ -17,7 +17,7 @@ patches = []
 system = "raw"
 steps = [
     "# converted from gozjaro-pkgs PKGBUILD cmake (build + package)",
-    "# source top dir \"cmake-3.31.6\" is stripped by the builder — paths below are flat",
+    "# cmake 4.x: 3.31 cannot compile against curl 8.23 (CURL_NETRC_OPTION became a real enum)\n  # source top dir \"cmake-4.5.0\" is stripped by the builder — paths below are flat",
     "",
     "cd \".\"",
     "# LFS ncurses is wide-only (libformw, no libform): --system-libs forces",
