@@ -5,7 +5,7 @@ release = 1
 desc = "A library which provides a secure layer over a reliable transport layer"
 license = "GPL-3.0-or-later"
 depends = ["nettle", "libtasn1", "p11-kit", "zlib"]
-build_depends = []
+build_depends = ["autoconf", "automake", "libtool"]
 
 [source]
 # ftp.gnupg.org no longer hosts release tarballs — use the upstream tag via git.
@@ -21,6 +21,8 @@ steps = [
     "# git source: checkout root is the source root (flat, no top dir)",
     "",
     "cd \".\"",
+    "# git tree ships no generated configure (tarballs did) — regenerate autotools",
+    "autoreconf -fi",
     "./configure \\",
     "--prefix=/usr \\",
     "--disable-static \\",
