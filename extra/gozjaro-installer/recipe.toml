@@ -1,6 +1,6 @@
 [package]
 name = "gozjaro-installer"
-version = "v4"
+version = "4"
 release = 1
 desc = "GozJaro disk installer (rust, glibc 2.31) + chroot initramfs builder script"
 license = "MIT"
@@ -24,7 +24,7 @@ steps = [
     "install -Dm755 \"gozjaro-install-x86_64-linux\" \"$DESTDIR/usr/bin/gozjaro-install\"",
     "install -Dm755 \"gozjaro-build-initramfs.sh\" \"$DESTDIR/usr/sbin/gozjaro-build-initramfs\"",
     "install -d -m755 \"$DESTDIR/usr/share/licenses/gozjaro-installer\"",
-    "echo \"gozjaro-installer v4 (installer-v4, Gozjaro/gozjaro-installer-rs @ 485bdef)\" > \"$DESTDIR/usr/share/licenses/gozjaro-installer/COPYING\"",
+    "echo \"gozjaro-installer 4 (GHA tag installer-v4, Gozjaro/gozjaro-installer-rs @ 485bdef)\" > \"$DESTDIR/usr/share/licenses/gozjaro-installer/COPYING\"",
 ]
 
 [install]
