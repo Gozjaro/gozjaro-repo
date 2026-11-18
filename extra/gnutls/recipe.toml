@@ -33,6 +33,7 @@ steps = [
     "--disable-guile \\",
     "--disable-doc \\",
     "--disable-tests \\",
+    "--with-included-unistring \\",
     "--without-idn",
     "make",
     "",
