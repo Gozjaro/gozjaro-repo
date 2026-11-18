@@ -1,5 +1,5 @@
---- a/scripts/Makefile
-+++ b/scripts/Makefile
+--- a/scripts/Makefile.in
++++ b/scripts/Makefile.in
 @@ -82,7 +82,11 @@
  	done
  	-$(RMDIR) $(DESTDIR)$(bindir)
