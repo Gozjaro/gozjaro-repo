@@ -1,0 +1,33 @@
+[package]
+name = "gozjaro-wallpapers"
+version = "1"
+release = 1
+desc = "Gozjaro official wallpapers (1920x1080 light/dark sets) + GNOME/KDE/Xfce integration files"
+license = "MIT"
+depends = []
+build_depends = []
+
+[source]
+# data/asset package: pinned commit for byte-reproducible builds
+git = "git+https://github.com/Gozjaro/gozjaro-wallpapers.git#6162d30999a333be68826ea0945866cfd0b506da"
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# asset package: install wallpapers + DE integration (Xfce reads /usr/share/backgrounds)",
+    "install -d -m755 \"$DESTDIR/usr/share/backgrounds/gozjaro\"",
+    "cp -a wallpapers/*.png \"$DESTDIR/usr/share/backgrounds/gozjaro/\"",
+    "# GNOME: register the set via gnome-background-properties (xml points at /usr/share/backgrounds/gozjaro/)",
+    "install -d -m755 \"$DESTDIR/usr/share/gnome-background-properties\"",
+    "cp -a gnome/gozjaro.xml \"$DESTDIR/usr/share/gnome-background-properties/gozjaro.xml\"",
+    "# KDE: install the wallpaper theme; its image key -> the installed emblem dark wallpaper",
+    "install -d -m755 \"$DESTDIR/usr/share/wallpapers/Gozjaro/contents/images\"",
+    "cp -a kde/Gozjaro/metadata.json \"$DESTDIR/usr/share/wallpapers/Gozjaro/metadata.json\"",
+    "ln -sf /usr/share/backgrounds/gozjaro/gozjaro-emblem-dark.png \"$DESTDIR/usr/share/wallpapers/Gozjaro/contents/images/gozjaro-emblem-dark.png\"",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

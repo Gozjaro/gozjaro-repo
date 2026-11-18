@@ -1,0 +1,32 @@
+[package]
+name = "gozjaro-logo"
+version = "1"
+release = 1
+desc = "Gozjaro logo (512x512) for icons, login managers and general branding"
+license = "MIT"
+depends = []
+build_depends = []
+
+[source]
+# logo asset lives in the org profile repo (Gozjaro/.github -> profile/logo.png)
+git = "git+https://github.com/Gozjaro/.github.git#1d4bc83e002a47b5456e64ad09abad15b5571c31"
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# asset package: install the logo to the generic icon + pixmap paths",
+    "install -d -m755 \"$DESTDIR/usr/share/icons/hicolor/512x512/apps\"",
+    "cp -a profile/logo.png \"$DESTDIR/usr/share/icons/hicolor/512x512/apps/gozjaro.png\"",
+    "# generic pixmaps location used by login managers / older DEs",
+    "install -d -m755 \"$DESTDIR/usr/share/pixmaps\"",
+    "cp -a profile/logo.png \"$DESTDIR/usr/share/pixmaps/gozjaro.png\"",
+    "# shared branding image dir",
+    "install -d -m755 \"$DESTDIR/usr/share/images/gozjaro\"",
+    "cp -a profile/logo.png \"$DESTDIR/usr/share/images/gozjaro/logo.png\"",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []
