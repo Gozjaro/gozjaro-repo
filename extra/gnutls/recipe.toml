@@ -5,7 +5,7 @@ release = 1
 desc = "A library which provides a secure layer over a reliable transport layer"
 license = "GPL-3.0-or-later"
 depends = ["nettle", "libtasn1", "p11-kit", "zlib"]
-build_depends = ["autoconf", "automake", "libtool"]
+build_depends = ["autoconf", "automake", "libtool", "git", "perl"]
 
 [source]
 # ftp.gnupg.org no longer hosts release tarballs — use the upstream tag via git.
@@ -21,15 +21,16 @@ steps = [
     "# git source: checkout root is the source root (flat, no top dir)",
     "",
     "cd \".\"",
-    "# git tree ships no generated configure (tarballs did) — regenerate autotools",
-    "autoreconf -fi",
+    "# git tree: init build submodules (gnulib + cligen + devel import trees);",
+    "# SUBMODULE_NOFETCH=1 skips the test-fuzzer submodules (tests are disabled)",
+    "git submodule update --init --depth 1 gnulib cligen devel/nettle devel/libtasn1",
+    "SUBMODULE_NOFETCH=1 ./bootstrap",
     "./configure \\",
     "--prefix=/usr \\",
     "--disable-static \\",
     "--disable-guile \\",
     "--disable-doc \\",
     "--disable-tests \\",
-    "--with-included-unistring \\",
     "--without-idn",
     "make",
     "",
