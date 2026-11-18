@@ -4,8 +4,8 @@ version = "1.53.0"
 release = 1
 desc = "Multi-platform support library with focus on asynchronous I/O (event loop)"
 license = "MIT"
-depends = ["glibc", "openssl"]
-build_depends = []
+depends = ["glibc"]
+build_depends = ["autoconf", "automake"]
 
 [source]
 urls = [
@@ -16,9 +16,10 @@ patches = []
 [build]
 system = "raw"
 steps = [
-    "# autotools, source top dir libuv-1.53.0 stripped by the builder — paths below are flat",
+    "# autotools from the git tarball: generate configure first (no pre-generated one)",
     "",
-    "./configure --prefix=/usr --with-openssl --enable-shared --disable-static",
+    "./autogen.sh",
+    "./configure --prefix=/usr --enable-shared --disable-static",
     "make",
     "",
     "",
