@@ -1,0 +1,14 @@
+--- a/scripts/Makefile
++++ b/scripts/Makefile
+@@ -82,7 +82,11 @@
+ 	done
+ 	-$(RMDIR) $(DESTDIR)$(bindir)
+ 
+-%: %.in %.txt
++# GozJaro: drop the vestigial %.txt prerequisite. The recipe below uses only
++# $@.in; the .txt files (xmlto txt of the docbook sources) need a text
++# browser (lynx/w3m/links) that the minimal tree does not ship, and they are
++# not installed or referenced anywhere else in the build.
++%: %.in
+ 	awk -f generate-help-script.awk $@.in | sed -e 's/@NAME@/'$@'/g' > $@
+ 	chmod a+x $@

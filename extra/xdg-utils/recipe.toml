@@ -9,7 +9,7 @@ build_depends = ["xmlto", "docbook-xsl"]
 
 [source]
 git = "git+https://gitlab.freedesktop.org/xdg/xdg-utils.git#356c380ad6fecc9ce6bea1f6a77986ba67402c80"
-patches = []
+patches = ["drop-txt-prereq.patch"]
 
 [build]
 system = "raw"
