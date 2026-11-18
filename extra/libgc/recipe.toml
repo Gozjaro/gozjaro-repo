@@ -1,0 +1,36 @@
+[package]
+name = "libgc"
+version = "8.2.12"
+release = 1
+desc = "Boehm-Demers-Weiser conservative garbage-collector library (libgc)"
+license = "GPL-2.0-or-later"
+depends = ["glibc"]
+build_depends = ["autoconf", "automake", "libtool"]
+
+[source]
+# The upstream GitHub (ivorg/gc) is gone; use the byte-identical Debian/Ubuntu
+# orig tarball. The gozpak source cache is seeded with the same bytes, so the
+# build is reproducible even if the mirror URL is flaky.
+urls = [
+    { url = "http://archive.ubuntu.com/ubuntu/pool/main/l/libgc/libgc_8.2.12.orig.tar.gz", sha256 = "bfa1a5c5b778ed652031becf1fc1a0bd56309b0da20c9ecdeb4c51bc36169df7" },
+]
+patches = ["libgc-pkgincludedir.patch"]
+
+[build]
+system = "raw"
+steps = [
+    "# converted from gozjaro-pkgs PKGBUILD libgc (build + package)",
+    "# the orig tarball has no pre-generated configure; run autoreconf.",
+    "",
+    "autoreconf -fi",
+    "./configure --prefix=/usr",
+    "make",
+    "",
+    "",
+    "make DESTDIR=\"$DESTDIR\" install",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

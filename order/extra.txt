@@ -189,3 +189,4 @@ plasma-desktop
 btop
 hyfetch
 w3m
+libgc

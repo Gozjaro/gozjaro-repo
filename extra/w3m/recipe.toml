@@ -5,7 +5,7 @@ release = 1
 desc = "Text-based web browser (used by xmlto for the HTML-to-text conversion)"
 license = "BSD-4-Clause"
 depends = ["glibc", "ncurses", "zlib"]
-build_depends = ["autoconf", "automake"]
+build_depends = ["autoconf", "automake", "libgc"]
 
 [source]
 # upstream SourceForge 0.5.3 download is dead (404); the debian snapshot of
