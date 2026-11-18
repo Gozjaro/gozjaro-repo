@@ -4,7 +4,7 @@ version = "1.79.1"
 release = 1
 desc = "DocBook XSL stylesheets"
 license = "Custom"
-depends = []
+depends = ["docbook-xml"]
 build_depends = ["libxml2"]
 
 [source]
@@ -21,15 +21,9 @@ steps = [
     "install -d -m755 \"$DESTDIR/usr/share/xml/docbook/xsl/current\"",
     "for d in assembly common epub epub3 fo html htmlhelp javahelp lib manpages params slides template webhelp website xhtml xhtml5; do cp -a \"$d\" \"$DESTDIR/usr/share/xml/docbook/xsl/current/\"; done",
     "cp -a catalog.xml VERSION.xsl \"$DESTDIR/usr/share/xml/docbook/xsl/current/\"",
-    "install -d -m755 \"$DESTDIR/etc/xml\"",
-        "cat > \"$DESTDIR/etc/xml/catalog\" <<'EOF'",
-    "<?xml version=\"1.0\"?>",
-    "<!DOCTYPE catalog PUBLIC \"-//OASIS//DTD Entity Resolution XML Catalog V1.0//EN\" \"http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd\">",
-    "<catalog xmlns=\"urn:oasis:names:tc:entity:xmlns:xml:catalog\">",
-    "  <public publicId=\"-//OASIS//DTD DocBook XML V4.3//EN\" uri=\"file:///usr/share/xml/docbook/dtd/xml/4.3/docbookx.dtd\"/>",
-    "  <rewriteURI uriStartString=\"http://docbook.sourceforge.net/release/xsl/current/\" rewritePrefix=\"file:///usr/share/xml/docbook/xsl/current/\"/>",
-    "</catalog>",
-    "EOF",
+    "# catalog ownership: docbook-xml writes /etc/xml/catalog (DTD publicIds + the XSL",
+    "# rewriteURI). docbook-xsl adds no catalog of its own — the rewriteURI entry it",
+    "# used to duplicate lives in docbook-xml's catalog; hence the dependency.",
 ]
 
 [install]
