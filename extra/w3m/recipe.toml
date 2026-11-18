@@ -1,0 +1,36 @@
+[package]
+name = "w3m"
+version = "0.5.3"
+release = 1
+desc = "Text-based web browser (used by xmlto for the HTML-to-text conversion)"
+license = "BSD-4-Clause"
+depends = ["glibc", "ncurses", "zlib"]
+build_depends = ["autoconf", "automake"]
+
+[source]
+# upstream SourceForge 0.5.3 download is dead (404); the debian snapshot of
+# the orig tarball is the byte-identical upstream source.
+urls = [
+    { url = "https://snapshot.debian.org/archive/debian/20240101T000000Z/pool/main/w/w3m/w3m_0.5.3.orig.tar.gz", sha256 = "e994d263f2fd2c22febfbe45103526e00145a7674a0fda79c822b97c2770a9e3" },
+]
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# converted from gozjaro-pkgs PKGBUILD w3m (build + package)",
+    "# plain-text http browser: no ssl (offline tree), no image handlers.",
+    "",
+    "autoreconf -fi",
+    "./configure --prefix=/usr",
+    "make",
+    "",
+    "",
+    "make DESTDIR=\"$DESTDIR\" install",
+    "install -Dm644 COPYING \"$DESTDIR/usr/share/licenses/w3m/COPYING\"",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

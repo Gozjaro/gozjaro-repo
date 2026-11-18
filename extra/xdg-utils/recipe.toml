@@ -5,11 +5,11 @@ release = 1
 desc = "Command line tools that assist applications with desktop integration"
 license = "MIT"
 depends = []
-build_depends = ["xmlto", "docbook-xsl"]
+build_depends = ["xmlto", "docbook-xsl", "w3m"]
 
 [source]
 git = "git+https://gitlab.freedesktop.org/xdg/xdg-utils.git#356c380ad6fecc9ce6bea1f6a77986ba67402c80"
-patches = ["drop-txt-prereq.patch"]
+patches = []
 
 [build]
 system = "raw"

@@ -188,3 +188,4 @@ plasma-workspace
 plasma-desktop
 btop
 hyfetch
+w3m
