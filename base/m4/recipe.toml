@@ -14,7 +14,7 @@ patches = []
 [build]
 system = "raw"
 steps = [
-    "./configure --prefix=/usr",
+    "./configure --prefix=/usr CFLAGS=\"${CFLAGS:-} -std=gnu17\"",
     "make -j$(nproc)",
     "make -j$(nproc) DESTDIR=\"$DESTDIR\" install",
 ]
