@@ -1,0 +1,110 @@
+[package]
+name = "gozjaro-base"
+version = "26.11"
+release = 1
+arch = "any"
+desc = "GozJaro 26.11 LFS base system meta-package. Declares via provides the base packages the running LFS system supplies (glibc, bash, coreutils, gcc, ...), so gozpak dependency resolution can satisfy depends on them without them being in the repo. Contains no files; install it on every GozJaro system before installing repo packages that depend on the LFS base."
+license = "MIT"
+depends = []
+provides = [
+"acl",
+"attr",
+"autoconf",
+"automake",
+"bash",
+"bc",
+"binutils",
+"bison",
+"bzip2",
+"check",
+"coreutils",
+"curl",
+"dbus",
+"diffutils",
+"dosfstools",
+"e2fsprogs",
+"expat",
+"file",
+"findutils",
+"flex",
+"flit-core",
+"gawk",
+"gcc",
+"gdbm",
+"gettext",
+"git",
+"glibc",
+"gmp",
+"gozpak",
+"gperf",
+"grep",
+"groff",
+"gzip",
+"iana-etc",
+"inetutils",
+"intltool",
+"iproute2",
+"jinja2",
+"kbd",
+"kmod",
+"less",
+"libarchive",
+"libcap",
+"libelf",
+"libffi",
+"libpipeline",
+"libtool",
+"libxcrypt",
+"linux",
+"linux-firmware",
+"linux-headers",
+"m4",
+"make",
+"man-db",
+"man-pages",
+"markupsafe",
+"meson",
+"mpc",
+"mpfr",
+"nano",
+"ncurses",
+"ninja",
+"openssh",
+"openssl",
+"parted",
+"patch",
+"perl",
+"pkgconf",
+"procps-ng",
+"psmisc",
+"python3",
+"readline",
+"rsync",
+"sed",
+"setuptools",
+"shadow",
+"systemd",
+"tar",
+"texinfo",
+"util-linux",
+"vim",
+"wget",
+"wheel",
+"xml-parser",
+"xxhash",
+"xz",
+"zlib",
+"zstd"
+]
+
+[build]
+system = "raw"
+steps = []
+
+[install]
+post = []
+files = "auto"
+backup = []
+
+[meta]
+type = "meta"
