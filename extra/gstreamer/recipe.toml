@@ -23,7 +23,6 @@ steps = [
     "--prefix=/usr \\",
     "--buildtype=release \\",
     "-Dgst_debug=false \\",
-    "-Dgtk_doc=disabled \\",
     "-Dintrospection=enabled \\",
     "-Ddbghelp=disabled \\",
     "-Dtests=disabled \\",
