@@ -1,13 +1,13 @@
 [package]
 name = "shadow"
-version = "4.17.3"
+version = "4.20.3"
 release = 1
 depends = ["libxcrypt", "acl", "attr"]
 build_depends = []
 
 [source]
 urls = [
-    { url = "https://github.com/shadow-maint/shadow/releases/download/$VERSION/shadow-$VERSION.tar.xz", sha256 = "09e896c7b01c97ba4be2d6be332c55a3e478b4893cd3c3466d8224e622bd4943" },
+    { url = "https://github.com/shadow-maint/shadow/releases/download/$VERSION/shadow-$VERSION.tar.xz", sha256 = "623be9429f64fa2165bfc5957c6a642ec309c5cf23c0d53855c99f7591922297" },
 ]
 patches = []
 
