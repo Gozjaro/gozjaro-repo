@@ -27,7 +27,7 @@ steps = [
     "",
     "",
     "DESTDIR=\"$DESTDIR\" cmake --install build",
-    "install -Dm644 \"simdutf/LICENSE-MIT\" -t \"$DESTDIR/usr/share/licenses/simdutf/\"",
+    "install -Dm644 \"LICENSE-MIT\" -t \"$DESTDIR/usr/share/licenses/simdutf/\"",
 ]
 
 [install]

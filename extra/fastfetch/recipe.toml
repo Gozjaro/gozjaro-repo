@@ -17,9 +17,9 @@ patches = []
 system = "raw"
 steps = [
     "# converted from gozjaro-pkgs PKGBUILD fastfetch (build + package)",
-    "# source top dir \"2.30.1\" is stripped by the builder — paths below are flat",
+    "# tarball source: top dir fastfetch-1.0.1 stripped by the builder — paths below are flat",
     "",
-    "cmake -B build -S \"fastfetch-2.30.1\" \\",
+    "cmake -B build -S . \\",
     "-DCMAKE_BUILD_TYPE=Release \\",
     "-DCMAKE_INSTALL_PREFIX=/usr \\",
     "-DENABLE_SYSTEM_YYJSON=OFF \\",
@@ -28,7 +28,7 @@ steps = [
     "",
     "",
     "DESTDIR=\"$DESTDIR\" cmake --install build",
-    "install -Dm644 \"fastfetch-2.30.1/LICENSE\" \"$DESTDIR/usr/share/licenses/fastfetch/LICENSE\"",
+    "install -Dm644 \"LICENSE\" \"$DESTDIR/usr/share/licenses/fastfetch/LICENSE\"",
 ]
 
 [install]

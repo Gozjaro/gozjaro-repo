@@ -38,11 +38,12 @@ steps = [
     "DESTDIR=\"$DESTDIR\" cmake --install build -v",
     "",
     "# header required by some dependents",
-    "# https://bugs.archlinux.org/task/24787",
-    "install -vDm 644 .src/jpegint.h \"$DESTDIR/usr/include\"",
+    "# https://bugs.archlinux.org/task/24787 — out-of-source build: the generated copy",
+    "# would live in build/, but the shipped source file is what dependents include",
+    "install -vDm 644 src/jpegint.h \"$DESTDIR/usr/include\"",
     "",
-    "install -vDm 644 .LICENSE.md -t \"$DESTDIR/usr/share/licenses/libjpeg/\"",
-    "install -vDm 644 .README.ijg -t \"$DESTDIR/usr/share/licenses/libjpeg/\"",
+    "install -vDm 644 LICENSE.md -t \"$DESTDIR/usr/share/licenses/libjpeg/\"",
+    "install -vDm 644 README.ijg -t \"$DESTDIR/usr/share/licenses/libjpeg/\"",
 ]
 
 [install]
