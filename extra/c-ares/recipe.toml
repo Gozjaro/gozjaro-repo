@@ -16,11 +16,11 @@ system = "raw"
 steps = [
     "# converted from gozjaro-pkgs PKGBUILD c-ares (build + package)",
     "",
-    "local cmake_options=(",
+    "cmake_options=(",
     "-B build",
     "-D CMAKE_INSTALL_PREFIX=/usr",
     "-D CMAKE_BUILD_TYPE=None",
-    "-S c-ares",
+    "-S .",
     "-W no-dev",
     ")",
     "cmake \"${cmake_options[@]}\"",
@@ -28,8 +28,8 @@ steps = [
     "",
     "",
     "DESTDIR=\"$DESTDIR\" cmake --install build",
-    "install -vDm 644 c-ares/LICENSE.md -t \"$DESTDIR/usr/share/licenses/c-ares/\"",
-    "install -vDm 644 c-ares/{AUTHORS,{CONTRIBUTING,README,RELEASE-NOTES}.md} -t \"$DESTDIR/usr/share/doc/c-ares/\"",
+    "install -vDm 644 LICENSE.md -t \"$DESTDIR/usr/share/licenses/c-ares/\"",
+    "install -vDm 644 {AUTHORS,{CONTRIBUTING,README,RELEASE-NOTES}.md} -t \"$DESTDIR/usr/share/doc/c-ares/\"",
 ]
 
 [install]

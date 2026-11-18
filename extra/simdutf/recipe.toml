@@ -17,7 +17,7 @@ steps = [
     "# converted from gozjaro-pkgs PKGBUILD simdutf (build + package)",
     "",
     "cmake -B build \\",
-    "-S \"simdutf\" \\",
+    "-S . \\",
     "-D CMAKE_BUILD_TYPE=None \\",
     "-D CMAKE_INSTALL_PREFIX=/usr \\",
     "-D BUILD_SHARED_LIBS=ON \\",

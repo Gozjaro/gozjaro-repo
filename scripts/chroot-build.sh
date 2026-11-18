@@ -1,5 +1,8 @@
 #!/bin/bash
 # Build with the LFS toolchain in a disposable overlay; keep downloads and packages.
+# Each built package is installed into a persistent layer ($CACHE/installed) that
+# is stacked under the LFS root as a second overlay lower — so later builds see
+# headers/libs/.pc files of earlier extra packages (LFS files still win on conflicts).
 set -euo pipefail
 
 die() { echo "chroot-build: $*" >&2; exit 1; }
@@ -24,6 +27,9 @@ fi
 LFS=$(realpath -m -- "${LFS:-/mnt/lfs}")
 WORK=$(realpath -m -- "${WORK:-/var/tmp/gozjaro-chroot}")
 CACHE=$(realpath -m -- "${CACHE:-/var/cache/gozjaro}")
+# Persistent layer of already-built extra packages: stacked under the LFS
+# root as a second overlay lower, installed into after each successful build.
+INSTALLED="$CACHE/installed"
 repo=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)
 [[ -f "$LFS/usr/bin/env" ]] || die "$LFS/usr/bin/env is missing; need a built LFS root"
 # Reject overlaps before any mkdir/rm, including paths resolved through symlinks.
@@ -48,9 +54,9 @@ cleanup() {
     exit "$status"
 }
 rm -rf -- "$WORK/upper" "$WORK/work"
-mkdir -p -- "$WORK/upper" "$WORK/work" "$merged" "$CACHE"
+mkdir -p -- "$WORK/upper" "$WORK/work" "$merged" "$CACHE" "$INSTALLED"
 trap cleanup EXIT
-mount -t overlay overlay -o "lowerdir=$LFS,upperdir=$WORK/upper,workdir=$WORK/work" "$merged"
+mount -t overlay overlay -o "lowerdir=$LFS:$INSTALLED,upperdir=$WORK/upper,workdir=$WORK/work" "$merged"
 mount --make-private "$merged"
 
 mkdir -p "$merged"/{dev,proc,sys,run,etc,gozjaro-repo,var/cache/gozjaro}
@@ -101,7 +107,30 @@ fi
 if $shell; then
     command_args=(--login)
 else
-    command_args=(-ec 'for pkg; do gozpak repo-build "$pkg"; done' chroot-build "${packages[@]}")
+    # Build, then extract the fresh .gpkg into the persistent layer so later
+    # packages (next chroot session) see its headers/libs/.pc files.
+    # 'gozpak install' is unusable here (it requires a synced remote repo);
+    # extracting the payload is what install would do, and it reuses the same
+    # rootfs/-strip bootstrap logic as the gozpak unpack above. A failed
+    # build skips the extraction and moves to the next package.
+    command_args=(-ec "$(cat <<'EOF'
+for pkg; do
+    if gozpak repo-build "$pkg"; then
+        gpkg=$(ls -1t /var/cache/gozjaro/gozpak/bin/"$pkg"-*.gpkg 2>/dev/null | head -1)
+        if [[ -n $gpkg ]]; then
+            tmpx=$(mktemp -d)
+            tar --zstd -xf "$gpkg" -C "$tmpx"
+            if [[ -d "$tmpx/rootfs" ]]; then
+                cp -a -- "$tmpx/rootfs/." /var/cache/gozjaro/installed/
+            else
+                cp -a -- "$tmpx/." /var/cache/gozjaro/installed/
+            fi
+            rm -rf -- "$tmpx"
+        fi
+    fi
+done
+EOF
+)" chroot-build "${packages[@]}")
 fi
 chroot "$merged" /usr/bin/env -i HOME=/root TERM="${TERM:-dumb}" \
     PATH="$build_path" MAKEFLAGS="-j$(nproc)" XDG_CACHE_HOME=/var/cache/gozjaro \

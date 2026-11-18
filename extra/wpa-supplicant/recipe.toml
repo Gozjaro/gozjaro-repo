@@ -10,8 +10,6 @@ build_depends = []
 [source]
 urls = [
     { url = "https://w1.fi/releases/wpa_supplicant-2.11.tar.gz" , sha256 = "912ea06f74e30a8e36fbb68064d6cdff218d8d591db0fc5d75dee6c81ac7fc0a"},
-    { url = "wpa_supplicant.conf", sha256 = "0d3245b021e2b3ba9790784940456f9fe4ac52268386c02245e2f952268a0291" },
-    { url = "wpa_supplicant@.service", sha256 = "360372a609c3296b301c226fa2b508864a8d4fc96b2209e067257d7aba861755" },
 ]
 patches = []
 
@@ -27,7 +25,6 @@ steps = [
     "",
     "install -Dm755 wpa_supplicant \"$DESTDIR/usr/bin/wpa_supplicant\"",
     "install -Dm755 wpa_cli \"$DESTDIR/usr/bin/wpa_cli\"",
-    "install -Dm644 wpa_supplicant.conf \"$DESTDIR/usr/share/doc/wpa_supplicant/wpa_supplicant.conf\"",
     "install -d \"$DESTDIR/etc/wpa_supplicant\"",
     "# systemd unit",
     "install -Dm644 systemd/wpa_supplicant@.service \\",

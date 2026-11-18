@@ -16,12 +16,10 @@ system = "raw"
 steps = [
     "# converted from gozjaro-pkgs PKGBUILD xdg-utils (build + package)",
     "",
-    "cd xdg-utils",
     "./configure --prefix=/usr",
     "make",
     "",
     "",
-    "cd xdg-utils",
     "make DESTDIR=\"$DESTDIR\" install",
     "install -Dm644 LICENSE \"$DESTDIR/usr/share/licenses/xdg-utils/LICENSE\"",
 ]

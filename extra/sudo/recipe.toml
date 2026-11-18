@@ -27,7 +27,6 @@ steps = [
     "--with-all-insults \\",
     "--with-env-editor \\",
     "--without-pam \\",
-    "--with-ssl=openssl \\",
     "--with-rundir=/run/sudo \\",
     "--with-vardir=/var/db/sudo \\",
     "--with-iologdir=/var/log/sudo-io \\",
