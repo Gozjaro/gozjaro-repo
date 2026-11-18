@@ -8,9 +8,10 @@ depends = []
 build_depends = ["libxml2"]
 
 [source]
-url = "https://deb.debian.org/debian/pool/main/d/docbook-xml/docbook-xml_4.5.orig.tar.gz"
-sha256 = "b0f8edcf697f5318e63dd98c9a931f3fee167af0805ba441db372e0f17b2a44f"
-strip_top_dir = true
+urls = [
+    { url = "https://deb.debian.org/debian/pool/main/d/docbook-xml/docbook-xml_4.5.orig.tar.gz", sha256 = "b0f8edcf697f5318e63dd98c9a931f3fee167af0805ba441db372e0f17b2a44f" },
+]
+# debian pool orig tarball (docbook.org stopped serving zips); DTDs 4.0-4.5
 patches = []
 
 [build]
@@ -23,7 +24,7 @@ steps = [
     "    cp -a \"$v\" \"$DESTDIR/usr/share/xml/docbook/dtd/xml/${v#docbook-}\"",
     "done",
     "install -d -m755 \"$DESTDIR/etc/xml\"",
-    "test -f \"$DESTDIR/etc/xml/catalog\" || touch \"$DESTDIR/etc/xml/catalog\"",
+    "cp /etc/xml/catalog \"$DESTDIR/etc/xml/catalog\" 2>/dev/null || touch \"$DESTDIR/etc/xml/catalog\"",
     "xmlcatalog -v --no-update-indices --add \"PUBLIC\" \"-//OASIS//DTD DocBook XML V4.3//EN\" \"file:///usr/share/xml/docbook/dtd/xml/4.3/docbookx.dtd\" \"$DESTDIR/etc/xml/catalog\"",
 ]
 
