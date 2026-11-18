@@ -11,7 +11,7 @@ build_depends = []
 # ftp.gnupg.org no longer hosts release tarballs — use the upstream tag via git.
 # 3.8.13 (latest) builds against nettle 4.x; 3.8.8 predated the nettle/sha.h
 # consolidation and breaks on our wide-only, nettle-4 tree.
-git = "git+https://github.com/gnutls/gnutls.git#v3.8.13"
+git = "git+https://github.com/gnutls/gnutls.git#3.8.13"
 patches = []
 
 [build]
