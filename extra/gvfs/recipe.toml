@@ -30,8 +30,6 @@ steps = [
     "-Dgoogle=false \\",
     "-Dnfs=false \\",
     "-Dsmb=false \\",
-    "-Dtests=false \\",
-    "-Dman=false",
     "ninja -C build",
     "",
     "",

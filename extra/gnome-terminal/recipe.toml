@@ -21,8 +21,6 @@ steps = [
     "--prefix=/usr \\",
     "--sysconfdir=/etc \\",
     "--buildtype=release \\",
-    "-Dtests=false \\",
-    "-Dman=false",
     "ninja -C build",
     "",
     "",

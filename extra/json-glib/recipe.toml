@@ -22,7 +22,7 @@ steps = [
     "meson setup \".\" build \\",
     "--prefix=/usr \\",
     "--buildtype=release \\",
-    "-Ddocs=disabled \\",
+    "-Ddocumentation=disabled \\",
     "-Dtests=false \\",
     "-Dman=false",
     "ninja -C build",
