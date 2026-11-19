@@ -1,0 +1,27 @@
+[package]
+name = "linux-kernel"
+version = "7.1.8"
+release = 1
+arch = "x86_64"
+desc = "Pre-built GozJaro kernel 7.1.8: vmlinuz-7.1.8-gozjaro, /lib/modules/7.1.8 (11 ko + builtin lists), initramfs initrd-7.1.8-gozjaro.img, System.map + config. Packages the tree's stage 80/85 build artifacts so an installed system can switch kernel with 'gozpak get linux-kernel' instead of a source rebuild."
+license = "GPL-2.0-or-later"
+depends = []
+
+[build]
+system = "raw"
+steps = [
+"# package the tree's built kernel (stage 80/85 artifacts)",
+"test -f /boot/vmlinuz-7.1.8-gozjaro -a -f /boot/initrd-7.1.8-gozjaro.img -d /lib/modules/7.1.8",
+"mkdir -p $DESTDIR/boot $DESTDIR/lib/modules",
+"cp /boot/vmlinuz-7.1.8-gozjaro /boot/System.map-7.1.8 /boot/config-7.1.8 /boot/initrd-7.1.8-gozjaro.img $DESTDIR/boot/",
+"cp -a /lib/modules/7.1.8 $DESTDIR/lib/modules/",
+"rm -f $DESTDIR/lib/modules/7.1.8/build",
+]
+
+[install]
+post = [
+"if command -v grub-mkconfig >/dev/null 2>&1; then grub-mkconfig -o /boot/grub/grub.cfg || echo 'grub-mkconfig failed - add a grub entry manually'; fi",
+"echo 'linux-kernel 7.1.8-gozjaro installed: /boot/vmlinuz-7.1.8-gozjaro'",
+]
+files = "auto"
+backup = []
