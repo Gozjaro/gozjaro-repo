@@ -1,8 +1,8 @@
 [package]
 name = "linux"
 version = "7.3.5"
-release = 2
-desc = "Linux kernel (bzImage + modules)"
+release = 3
+desc = "Pre-built GozJaro Linux kernel 7.3.5: vmlinuz + /lib/modules + System.map + config + firmware. Installing this package updates the running system's kernel ('gozpak get linux'). Post-install regenerates the GRUB boot entry via the grub-mkconfig registry hook (skipped, non-fatal, if grub-mkconfig is absent)."
 license = "GPL-2.0-only"
 depends = []
 build_depends = []
@@ -33,6 +33,6 @@ steps = [
 ]
 
 [install]
-post = []
+post = ["grub-mkconfig"]
 files = "auto"
 backup = []
