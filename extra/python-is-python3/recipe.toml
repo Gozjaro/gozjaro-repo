@@ -1,0 +1,21 @@
+[package]
+name = "python-is-python3"
+version = "1"
+release = 1
+arch = "any"
+desc = "Convenience symlinks: python -> python3, pip -> pip3 (Debian python-is-python3 style). For scripts and tooling that hardcode python/pip."
+license = "MIT"
+depends = ["python3"]
+
+[build]
+system = "raw"
+steps = [
+"mkdir -p \"$DESTDIR/usr/bin\"",
+"ln -sf python3 \"$DESTDIR/usr/bin/python\"",
+"ln -sf pip3 \"$DESTDIR/usr/bin/pip\""
+]
+
+[install]
+post = []
+files = "auto"
+backup = []
