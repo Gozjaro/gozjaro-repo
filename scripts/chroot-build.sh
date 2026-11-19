@@ -76,6 +76,14 @@ mount --bind "$CACHE" "$merged/var/cache/gozjaro"
 if [[ ! -e "$merged/usr/bin/gozpak" ]]; then
     default_gpkg=$CACHE/gozpak-6.0.0-1.gpkg
     GOZPAK_GPKG=${GOZPAK_GPKG:-$default_gpkg}
+fi
+if [[ -n "${GOZPAK_GPKG:-}" && -e "$merged/usr/bin/gozpak" ]]; then
+    # Explicit GOZPAK_GPKG wins over a gozpak already present in the
+    # persistent layer (stale builder, e.g. older hook registry): drop
+    # the layer's copy so the payload below re-stages it.
+    rm -f -- "$merged/usr/bin/gozpak"
+fi
+if [[ ! -e "$merged/usr/bin/gozpak" ]]; then
     if [[ ! -f "$GOZPAK_GPKG" ]]; then
         [[ "$GOZPAK_GPKG" == "$default_gpkg" ]] || die "package not found: $GOZPAK_GPKG"
         curl -fL https://github.com/Gozjaro/gozjaro-repo/releases/download/stable/gozpak-6.0.0-1.gpkg \
