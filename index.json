@@ -2516,6 +2516,22 @@
     "replaces": []
   },
   {
+    "name": "python-is-python3",
+    "version": "1",
+    "release": 1,
+    "epoch": 0,
+    "arch": "any",
+    "sha256": "aac38c341fd2539dacbe6b25837e01b1dfe900c6f2ce090927f950ad60bdf4bb",
+    "size": 535,
+    "url": "http://192.168.71.36:8788/stable/python-is-python3-1-1.gpkg",
+    "depends": [
+      "python3"
+    ],
+    "provides": [],
+    "conflicts": [],
+    "replaces": []
+  },
+  {
     "name": "python3",
     "version": "3.14.10",
     "release": 1,
