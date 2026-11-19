@@ -4,7 +4,7 @@ version = "47.3"
 release = 1
 desc = "Next generation desktop shell for GNOME"
 license = "GPL-2.0-or-later"
-depends = ["mutter", "gjs", "glib2", "cairo", "pango", "libadwaita", "networkmanager", "gnome-desktop"]
+depends = ["mutter", "gjs", "glib2", "cairo", "pango", "libadwaita", "networkmanager", "gnome-desktop", "at-spi2-core"]
 build_depends = ["meson", "ninja", "gobject-introspection", "wayland-protocols"]
 
 [source]

@@ -23,7 +23,6 @@ steps = [
     "--prefix=/usr \\",
     "--sysconfdir=/etc \\",
     "--buildtype=release \\",
-    "-Ddemos=false \\",
     "-Dbuild-examples=false \\",
     "-Dbuild-tests=false \\",
     "-Dbuild-testsuite=false \\",

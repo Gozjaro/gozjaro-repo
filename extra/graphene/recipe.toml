@@ -19,7 +19,7 @@ steps = [
     "# converted from gozjaro-pkgs PKGBUILD graphene (build + package)",
     "# source top dir \"1.10.8\" is stripped by the builder — paths below are flat",
     "",
-    "meson setup \"graphene-1.10.8\" build \\",
+    "meson setup \".\" build \\"
     "--prefix=/usr \\",
     "--buildtype=release \\",
     "-Dgtk_doc=false \\",
