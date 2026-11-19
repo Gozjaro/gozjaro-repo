@@ -10,8 +10,10 @@ depends = []
 [build]
 system = "raw"
 steps = [
-"# package the tree's built kernel (stage 80/85 artifacts)",
-"test -f /boot/vmlinuz-7.1.8-gozjaro -a -f /boot/initrd-7.1.8-gozjaro.img -d /lib/modules/7.1.8",
+"# package the tree's built kernel (stage 80/85 artifacts); dash test(1) has no -a, so separate lines",
+"test -f /boot/vmlinuz-7.1.8-gozjaro",
+"test -f /boot/initrd-7.1.8-gozjaro.img",
+"test -d /lib/modules/7.1.8",
 "mkdir -p $DESTDIR/boot $DESTDIR/lib/modules",
 "cp /boot/vmlinuz-7.1.8-gozjaro /boot/System.map-7.1.8 /boot/config-7.1.8 /boot/initrd-7.1.8-gozjaro.img $DESTDIR/boot/",
 "cp -a /lib/modules/7.1.8 $DESTDIR/lib/modules/",
