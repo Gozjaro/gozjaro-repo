@@ -22,6 +22,7 @@ steps = [
     "meson setup \".\" build \\",
     "--prefix=/usr \\",
     "--buildtype=release \\",
+    "-Dnls=disabled \\",
     "-Ddocumentation=disabled \\",
     "-Dtests=false \\",
     "-Dman=false",
