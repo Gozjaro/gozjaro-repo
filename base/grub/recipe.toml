@@ -1,0 +1,31 @@
+[package]
+name = "grub"
+version = "2.14"
+release = 1
+arch = "x86_64"
+desc = "GRUB 2.14 bootloader userland: grub-mkconfig / grub-install / grub-mkrescue + x86_64-efi platform modules. Provides the grub-mkconfig tool so the gozpak install-side hook (grub-mkconfig) can regenerate the boot entry after kernel installs."
+license = "GPL-3.0-or-later"
+depends = ["glib2", "zlib"]
+
+[source]
+urls = [
+    { url = "https://ftp.gnu.org/gnu/grub/grub-2.14.tar.xz", sha256 = "bc8d3c73535b8838d8c8e2654d73edc4e6ae8c8acdb45d5df5dc9a1547446d43" },
+]
+patches = []
+
+[build]
+system = "raw"
+steps = [
+# dash-safe single-purpose lines; LFS-style configure generates the
+# grub-mkconfig script by default (no special flag needed)
+"./configure --prefix=/usr --sysconfdir=/etc --libdir=/usr/lib --with-platforms=x86_64-efi,i386-pc --enable-grub2 --disable-werror",
+"make -j$(nproc)",
+"make install DESTDIR=$DESTDIR",
+# verify the tool the gozpak hook needs actually landed
+"test -x $DESTDIR/usr/sbin/grub-mkconfig || test -x $DESTDIR/usr/bin/grub-mkconfig",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []
