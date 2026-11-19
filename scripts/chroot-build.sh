@@ -150,6 +150,7 @@ EOF
 fi
 chroot "$merged" /usr/bin/env -i HOME=/root TERM="${TERM:-dumb}" \
     PATH="$build_path" MAKEFLAGS="-j$(nproc)" XDG_CACHE_HOME=/var/cache/gozjaro \
+    PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig \
     GOZPAK_PATH=/gozjaro-repo/base:/gozjaro-repo/extra "${extra_env[@]}" \
     /bin/bash "${command_args[@]}"
 echo "Built packages: $CACHE/gozpak/bin"
