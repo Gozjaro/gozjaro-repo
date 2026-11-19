@@ -193,3 +193,17 @@ libgc
 gozjaro-wallpapers
 gozjaro-logo
 gozjaro-installer
+pam
+libsecret
+libproxy
+libgtop
+gdm
+gnome-settings-daemon
+gnome-terminal
+gvfs
+gcr
+gssdp
+evolution-data-server
+hicolor-icon-theme
+adwaita-icon-theme
+accountsservice
