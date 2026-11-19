@@ -1,0 +1,24 @@
+[package]
+name = "scdoc"
+version = "1.11.5"
+release = 1
+desc = "Simple tool to convert plain text to roff man pages"
+license = "ISC"
+depends = []
+build_depends = ["make"]
+
+[source]
+git = "git+https://git.sr.ht/~sircmpwn/scdoc#1.11.5"
+
+[build]
+system = "raw"
+steps = [
+    "# plain Makefile project (git.sr.ht/~sircmpwn/scdoc)",
+    "make -j4",
+    "make install PREFIX=/usr DESTDIR=\"$DESTDIR\"",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

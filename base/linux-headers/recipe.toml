@@ -1,13 +1,13 @@
 [package]
 name = "linux-headers"
-version = "7.2.5"
+version = "7.3.5"
 release = 1
 depends = []
 build_depends = []
 
 [source]
 urls = [
-    { url = "https://www.kernel.org/pub/linux/kernel/v7.x/linux-$VERSION.tar.xz", sha256 = "55ddf0df8325d9dad96fcff7bd93977d22e3f50af06527572af59b77c7632b78" },
+    { url = "https://www.kernel.org/pub/linux/kernel/v7.x/linux-$VERSION.tar.xz", sha256 = "8f293f83d54f0b7b9be56863ebc5e4ea79d73e530b4ae55c572be97ef39f0990" },
 ]
 patches = []
 

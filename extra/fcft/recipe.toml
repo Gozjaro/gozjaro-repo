@@ -4,28 +4,25 @@ version = "3.3.3"
 release = 1
 desc = "Simple library for font loading and glyph rasterization"
 license = "MIT"
-depends = ["fontconfig", "freetype2", "harfbuzz", "libutf8proc", "pixman"]
-build_depends = ["meson", "scdoc", "tllist"]
+depends = ["fontconfig", "freetype2", "pixman"]
+build_depends = ["meson", "ninja", "scdoc", "tllist"]
 
 [source]
 urls = [
-    { url = "https://codeberg.org/dnkl/fcft/archive/3.3.3.tar.gz" , sha256 = "b0c0f4a599f43723736c8565b8b84337c4195077f07f1bb8bb3252bb13a2306a"},
+    { url = "https://codeberg.org/dnkl/fcft/releases/download/3.3.3/fcft-3.3.3.tar.gz", sha256 = "bb298772d625e7d917373d541456f34f1957a9e22b16f17f64158b2c3816563c" },
 ]
 patches = []
 
 [build]
 system = "raw"
 steps = [
-    "# converted from gozjaro-pkgs PKGBUILD fcft (build + package)",
-    "",
-    "arch-meson fcft build \\",
-    "-Dgrapheme-shaping=enabled \\",
-    "-Drun-shaping=enabled",
-    "",
-    "",
+    "# converted from gozjaro-pkgs PKGBUILD fcft; old steps called the dead arch-meson helper",
+    "# flags mirror the PKGBUILD shipped in the release tarball (shaping off, bundled nanosvg)",
+    "meson setup --prefix=/usr --buildtype=release --wrap-mode=nofallback build",
+    "ninja -C build",
     "meson install -C build --destdir \"$DESTDIR\"",
-    "install -Dm0644 -t \"$DESTDIR/usr/share/licenses/fcft/\" \"fcft/LICENSE\"",
-    "install -Dm0644 \"fcft/unicode/license.txt\" \"$DESTDIR/usr/share/licenses/fcft/LICENSE.unicode\"",
+    "install -Dm0644 -t \"$DESTDIR/usr/share/licenses/fcft/\" \"LICENSE\"",
+    "install -Dm0644 \"unicode/license.txt\" \"$DESTDIR/usr/share/licenses/fcft/LICENSE.unicode\"",
 ]
 
 [install]
