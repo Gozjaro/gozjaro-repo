@@ -102,6 +102,11 @@ if [[ -e "$merged/usr/bin/ccache" ]]; then
     build_path=/usr/lib/ccache/bin:$build_path
     extra_env+=(CCACHE_DIR=/var/cache/gozjaro/ccache)
 fi
+# Persistent cargo registry cache (host-populated; chroot builds stay
+# offline — the proxy path to crates.io from inside the chroot is flaky).
+if [[ -e "$CACHE/cargo-home" ]]; then
+    extra_env+=(CARGO_HOME=/var/cache/gozjaro/cargo-home CARGO_NET_OFFLINE=true)
+fi
 # Pass the host's repo list through, so repo-build can fetch binary deps.
 [[ -z "${GOZPAK_REPOS:-}" ]] || extra_env+=(GOZPAK_REPOS="$GOZPAK_REPOS")
 if $shell; then
