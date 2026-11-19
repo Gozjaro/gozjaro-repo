@@ -1,7 +1,7 @@
 [package]
 name = "fastfetch"
 version = "2.71.0"
-release = 2
+release = 3
 desc = "A fast system info tool written in C"
 license = "MIT"
 depends = []
@@ -23,23 +23,10 @@ steps = [
 "DESTDIR=\"$DESTDIR\" cmake --install build",
 "install -Dm644 \"LICENSE\" \"$DESTDIR/usr/share/licenses/fastfetch/LICENSE\"",
 "",
-"# GozJaro branding: ship the ASCII dog logo + system-wide fastfetch defaults",
+"# GozJaro branding: ship the ASCII logo + system-wide fastfetch defaults",
 "install -d -m755 \"$DESTDIR/usr/share/fastfetch/logos\"",
-"cat > \"$DESTDIR/usr/share/fastfetch/logos/gozjaro.txt\" <<'EOF'",
-" /\\              /\\",
-"/$1##$3\\            /$2%%$3\\",
-"|$1###$3\\          /$2%%%$3|",
-"|$1####$3\\________/$2%%%%$3|",
-"|        $1<>$3        |",
-"|                  |",
-"|   \\_\\      /_/   |",
-" \\                /",
-"  \\              /",
-"   \\            /",
-"    \\    <>    /",
-"     \\        /",
-"      \\______/",
-"EOF",
+"# logo asset (ANSI escapes kept verbatim; fastfetch prints them as-is)",
+"install -m644 \"$RECIPE_DIR/assets/gozjaro-logo.txt\" \"$DESTDIR/usr/share/fastfetch/logos/gozjaro.txt\"",
 "# system config: 2.x JSON-config semantics \u2014 a config file REPLACES the default module list,",
 "# so ship the default modules (29, from 2.71.0 --gen-config) + the dog logo (full path: the",
 "# system logo dir is NOT in the runtime name-lookup path) + colors. /etc/xdg is scanned",
