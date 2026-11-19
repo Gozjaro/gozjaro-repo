@@ -5,7 +5,7 @@ release = 1
 desc = "Javascript bindings for GNOME"
 license = "MIT"
 depends = ["glib2", "cairo", "gobject-introspection"]
-build_depends = ["meson", "ninja", "glib2", "cairo", "gobject-introspection", "dbus"]
+build_depends = ["meson", "ninja", "glib2", "cairo", "gobject-introspection", "dbus", "js128"]
 
 [source]
 urls = [

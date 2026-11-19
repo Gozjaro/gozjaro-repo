@@ -1,0 +1,35 @@
+[package]
+name = "js128"
+version = "128.14.0"
+release = 1
+desc = "SpiderMonkey JavaScript engine and libraries (mozjs-128), standalone build from Firefox ESR source"
+license = "MPL-2.0"
+depends = ["zlib"]
+build_depends = ["python3", "rust", "zlib"]
+
+[source]
+urls = [
+    { url = "https://archive.mozilla.org/pub/firefox/releases/128.14.0esr/source/firefox-128.14.0esr.source.tar.xz" , sha256 = "93b9ef6229f41cb22ff109b95bbf61a78395a0fe4b870192eeca22947cb09a53"},
+]
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# Arch-equivalent js128: standalone mozjs from the firefox ESR source",
+    "# trimmed build: no PGO, no LTO, no hardening, no lld (plain gcc/ld)",
+    "# source top dir \"firefox-128.14.0esr\" is stripped by the builder — paths below are flat",
+    "mkdir mozbuild",
+    "printf \"%s\\n\" \"ac_add_options --enable-application=js\" \"ac_add_options --prefix=/usr\" \"ac_add_options --enable-release\" \"ac_add_options --enable-optimize\" \"ac_add_options --disable-bootstrap\" \"ac_add_options --disable-debug\" \"ac_add_options --disable-jemalloc\" \"ac_add_options --disable-strip\" \"ac_add_options --with-system-zlib\" \"ac_add_options --without-system-icu\" \"ac_add_options --enable-shared-js\" \"ac_add_options --with-intl-api\" > .mozconfig",
+    "export MOZBUILD_STATE_PATH=\"$PWD/mozbuild\"",
+    "export MOZ_NOSPAM=1",
+    "./mach build",
+    "",
+    "",
+    "make -C obj DESTDIR=\\\"$DESTDIR\\\" install",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []
