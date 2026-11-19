@@ -73,8 +73,11 @@ mount --bind "$repo" "$merged/gozjaro-repo"
 mount -o remount,bind,ro "$merged/gozjaro-repo"
 mount --bind "$CACHE" "$merged/var/cache/gozjaro"
 
+# default_gpkg is referenced from the re-stage block below even when the
+# tree already had a gozpak (which the explicit GOZPAK_GPKG path above
+# removes), so assign it unconditionally:
+default_gpkg=$CACHE/gozpak-6.0.0-1.gpkg
 if [[ ! -e "$merged/usr/bin/gozpak" ]]; then
-    default_gpkg=$CACHE/gozpak-6.0.0-1.gpkg
     GOZPAK_GPKG=${GOZPAK_GPKG:-$default_gpkg}
 fi
 if [[ -n "${GOZPAK_GPKG:-}" && -e "$merged/usr/bin/gozpak" ]]; then
