@@ -5,7 +5,7 @@ release = 1
 desc = "A library for configuring and customizing font access"
 license = "MIT"
 depends = ["freetype2", "expat"]
-build_depends = ["meson", "ninja", "freetype2", "python-lxml"]
+build_depends = ["meson", "ninja", "freetype2"]
 
 [source]
 urls = [

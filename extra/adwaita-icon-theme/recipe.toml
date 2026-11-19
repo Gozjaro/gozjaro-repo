@@ -1,0 +1,33 @@
+[package]
+name = "adwaita-icon-theme"
+version = "51.0"
+release = 1
+desc = "Adwaita icon theme (GNOME default)"
+license = "LGPL-2.1-or-later"
+depends = []
+build_depends = ["meson", "ninja"]
+
+[source]
+urls = [
+    { url = "https://gitlab.gnome.org/GNOME/adwaita-icon-theme/-/archive/51.0/adwaita-icon-theme-51.0.tar.gz" , sha256 = "adda5270c67ecdeb9604d24202fd8558b193379f9a9488179591cd4cdd99593b"},
+]
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "meson setup \\",
+    "build . \\",
+    "--prefix=/usr \\",
+    "--sysconfdir=/etc \\",
+    "--buildtype=release",
+    "ninja -C build",
+    "",
+    "",
+    "DESTDIR=\\\"$DESTDIR\\\" ninja -C build install",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

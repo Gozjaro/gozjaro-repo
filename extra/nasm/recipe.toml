@@ -1,0 +1,28 @@
+[package]
+name = "nasm"
+version = "3.02"
+release = 1
+desc = "Netwide Assembler (x86 assembler, build dep of ffmpeg/libjpeg-turbo)"
+license = "BSD-4c"
+depends = []
+build_depends = ["make", "flex", "bison"]
+
+[source]
+urls = [
+    { url = "https://nasm.us/pub/nasm/releasebuilds/3.02/nasm-3.02.tar.xz", sha256 = "87336eba53b4acfe917424ab5d500d2b0054d9f5148d35c2273ccf2cfb712f0d" },
+]
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# converted from PKGBUILD nasm (arch)",
+    "./configure --prefix=/usr",
+    "make -j4",
+    "DESTDIR=\"$DESTDIR\" make install",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

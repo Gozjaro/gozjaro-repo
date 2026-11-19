@@ -1,0 +1,35 @@
+[package]
+name = "gcr"
+version = "3.41.0"
+release = 1
+desc = "GNOME Crypto Library"
+license = "LGPL-2.1-or-later"
+depends = ["glib2", "json-glib", "libsecret", "p11-kit"]
+build_depends = ["meson", "ninja", "gobject-introspection"]
+
+[source]
+urls = [
+    { url = "https://github.com/GNOME/gcr/archive/refs/tags/3.41.0.tar.gz" , sha256 = "092d933491e19eedfd39022a70ea7d849b8ff9b298d77885cee3690752eca22e"},
+]
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "meson setup \\",
+    "build . \\",
+    "--prefix=/usr \\",
+    "--sysconfdir=/etc \\",
+    "--buildtype=release \\",
+    "-Dtests=false \\",
+    "-Dman=false",
+    "ninja -C build",
+    "",
+    "",
+    "DESTDIR=\"$DESTDIR\" ninja -C build install",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

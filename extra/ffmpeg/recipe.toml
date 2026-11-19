@@ -5,7 +5,7 @@ release = 1
 desc = "Complete solution to record, convert and stream audio and video"
 license = "GPL-3.0-or-later"
 depends = ["alsa-lib", "libjpeg-turbo", "libwebp", "openssl", "zlib", "bzip2", "xz", "libdrm", "libva", "mesa"]
-build_depends = ["nasm", "yasm"]
+build_depends = ["nasm"]
 
 [source]
 urls = [

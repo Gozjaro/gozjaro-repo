@@ -5,7 +5,7 @@ release = 1
 desc = "Desktop integration portal for Flatpak and other sandboxed apps"
 license = "LGPL-2.1-or-later"
 depends = ["glib2", "dbus", "pipewire", "wayland"]
-build_depends = ["meson", "ninja", "wayland-protocols", "python-docutils"]
+build_depends = ["meson", "ninja", "wayland-protocols"]
 
 [source]
 urls = [

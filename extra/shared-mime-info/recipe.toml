@@ -5,7 +5,7 @@ release = 1
 desc = "Freedesktop.org Shared MIME Info"
 license = "GPL-2.0-or-later"
 depends = ["glib2"]
-build_depends = ["meson", "ninja", "glib2", "itstool", "xmlto"]
+build_depends = ["meson", "ninja", "glib2"]
 
 [source]
 urls = [

@@ -4,7 +4,7 @@ version = "3.8.8"
 release = 1
 desc = "Multi-format archive and compression library"
 license = "BSD-2-Clause"
-depends = ["zlib", "liblzma", "zstd", "bzip2", "openssl", "glibc"]
+depends = ["zlib", "xz", "zstd", "bzip2", "openssl", "glibc"]
 build_depends = ["cmake", "ninja"]
 
 [source]

@@ -1,0 +1,32 @@
+[package]
+name = "hicolor-icon-theme"
+version = "0.18"
+release = 1
+desc = "Freedesktop.org Hicolor icon theme"
+license = "GPL-2.0-or-later"
+depends = []
+build_depends = ["meson", "ninja"]
+
+[source]
+git = "git+https://gitlab.freedesktop.org/xdg/default-icon-theme#08d2acf17aefdb1b3760102ff5df8b95c1ef8884"
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# meson project (Arch builds hicolor from this repo)",
+    "meson setup \\",
+    "build . \\",
+    "--prefix=/usr \\",
+    "--sysconfdir=/etc \\",
+    "--buildtype=release",
+    "ninja -C build",
+    "",
+    "",
+    "DESTDIR=\\\"$DESTDIR\\\" ninja -C build install",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

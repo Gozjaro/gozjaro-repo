@@ -4,7 +4,7 @@ version = "9.2.2"
 release = 1
 desc = "Unicode routines (UTF8, UTF16, UTF32) and Base64"
 license = "Apache-2.0 OR MIT"
-depends = ["glibc", "libgcc"]
+depends = ["glibc"]
 build_depends = ["cmake", "git"]
 
 [source]

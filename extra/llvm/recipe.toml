@@ -1,0 +1,41 @@
+[package]
+name = "llvm"
+version = "23.1.6"
+release = 1
+desc = "LLVM compiler infrastructure + clang (build dep of mesa llvmpipe/shader pipeline)"
+license = "Apache-2.0 WITH LLVM-exception"
+depends = ["zlib", "zstd"]
+build_depends = ["cmake", "ninja", "python3"]
+
+[source]
+urls = [
+    { url = "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-23.1.6.tar.gz", sha256 = "66b37a51976c46ad86f49a2304c4dfd64be971f858846dfffaa8a32632474bb8" },
+]
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# arch-equivalent subset: LLVM core + clang, shared libs (mesa -Dshared-llvm=enabled)",
+    "cmake -B build -G Ninja \\",
+    "-DCMAKE_BUILD_TYPE=Release \\",
+    "-DCMAKE_INSTALL_PREFIX=/usr \\",
+    "-DLLVM_ENABLE_PROJECTS=clang \\",
+    "-DLLVM_TARGETS_TO_BUILD=X86 \\",
+    "-DLLVM_BUILD_SHARED_LIBS=ON \\",
+    "-DCLANG_LINK_CLANG_DYLIB=ON \\",
+    "-DLLVM_ENABLE_ZLIB=ON \\",
+    "-DLLVM_ENABLE_ZSTD=ON \\",
+    "-DLLVM_INCLUDE_EXAMPLES=OFF \\",
+    "-DLLVM_INCLUDE_TESTS=OFF \\",
+    "-DLLVM_INCLUDE_DOCS=OFF \\",
+    "-DLLVM_PARALLEL_LINK_JOBS=2 \\",
+    "-DLLVM_PARALLEL_LINK_JOBS_MAX=2",
+    "cmake --build build -j$(nproc)",
+    "DESTDIR=\"$DESTDIR\" cmake --install build",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

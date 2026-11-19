@@ -5,7 +5,7 @@ release = 1
 desc = "GObject-based multi-platform GUI toolkit (v4)"
 license = "LGPL-2.1-or-later"
 depends = ["gdk-pixbuf2", "cairo", "pango", "libxrandr", "libxi", "libxcursor", "glib2", "wayland", "libxkbcommon", "mesa"]
-build_depends = ["meson", "ninja", "gobject-introspection", "wayland-protocols", "shaderc"]
+build_depends = ["meson", "ninja", "gobject-introspection", "wayland-protocols"]
 
 [source]
 urls = [

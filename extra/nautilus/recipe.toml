@@ -5,7 +5,7 @@ release = 1
 desc = "Default file manager for GNOME"
 license = "GPL-3.0-or-later"
 depends = ["glib2", "gtk4", "libadwaita", "gdk-pixbuf2", "gnome-desktop"]
-build_depends = ["meson", "ninja", "gobject-introspection", "tracker3", "libportal"]
+build_depends = ["meson", "ninja", "gobject-introspection"]
 
 [source]
 urls = [

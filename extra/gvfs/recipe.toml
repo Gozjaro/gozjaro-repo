@@ -1,0 +1,44 @@
+[package]
+name = "gvfs"
+version = "1.46.2"
+release = 1
+desc = "User-space virtual filesystem"
+license = "LGPL-2.1-or-later"
+depends = ["glib2", "libproxy"]
+build_depends = ["meson", "ninja", "gobject-introspection"]
+
+[source]
+urls = [
+    { url = "https://download.gnome.org/sources/gvfs/1.46/gvfs-1.46.2.tar.xz" , sha256 = "d83fa160286670c03eb890240606d8afa7ea6a3a818e8ad17eeed8d976487bd7"},
+]
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# keep http/archive/cdda/sftp/admin; drop backends needing optional libs we don't ship",
+    "meson setup \\",
+    "build . \\",
+    "--prefix=/usr \\",
+    "--sysconfdir=/etc \\",
+    "--buildtype=release \\",
+    "-Dafc=false \\",
+    "-Dafp=false \\",
+    "-Dgphoto2=false \\",
+    "-Dmtp=false \\",
+    "-Ddnssd=false \\",
+    "-Dgoogle=false \\",
+    "-Dnfs=false \\",
+    "-Dsmb=false \\",
+    "-Dtests=false \\",
+    "-Dman=false",
+    "ninja -C build",
+    "",
+    "",
+    "DESTDIR=\\\"$DESTDIR\\\" ninja -C build install",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

@@ -1,0 +1,34 @@
+[package]
+name = "libgtop"
+version = "2.41.4"
+release = 1
+desc = "System monitoring library"
+license = "LGPL-2.1-or-later"
+depends = ["glib2"]
+build_depends = ["meson", "ninja", "gobject-introspection"]
+
+[source]
+urls = [
+    { url = "https://download.gnome.org/sources/libgtop/2.41/libgtop-2.41.4.tar.xz" , sha256 = "d3c18158549218835a00517d9c454a2de825ac7808efe84101a8b7e2a8ab6663"},
+]
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "meson setup \\",
+    "build . \\",
+    "--prefix=/usr \\",
+    "--sysconfdir=/etc \\",
+    "--buildtype=release \\",
+    "-Dtests=false",
+    "ninja -C build",
+    "",
+    "",
+    "DESTDIR=\"$DESTDIR\" ninja -C build install",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

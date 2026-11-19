@@ -1,0 +1,37 @@
+[package]
+name = "evolution-data-server"
+version = "3.54.3"
+release = 1
+desc = "Evolution Data Server (contacts/calendar storage daemon)"
+license = "LGPL-2.1-or-later"
+depends = ["glib2", "gnutls"]
+build_depends = ["glib2", "gobject-introspection"]
+
+[source]
+urls = [
+    { url = "https://download.gnome.org/sources/evolution-data-server/3.54/evolution-data-server-3.54.3.tar.xz" , sha256 = "5108dc38ee5cc1f8ef9155e87f6c4129f9644550a0962c5ae23ff807b57cb8d0"},
+]
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# EDS 3.54 generation is CMake-based; optional backends auto-detect",
+    "cmake \\",
+    "-B build \\",
+    "-G Ninja \\",
+    "-DCMAKE_BUILD_TYPE=release \\",
+    "-DCMAKE_INSTALL_PREFIX=/usr \\",
+    "-DCMAKE_INSTALL_LIBDIR=lib \\",
+    "-DENABLE_TESTS=OFF \\",
+    "-DENABLE_EXAMPLES=OFF",
+    "cmake --build build",
+    "",
+    "",
+    "DESTDIR=\\\"$DESTDIR\\\" cmake --install build",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

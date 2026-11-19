@@ -5,7 +5,7 @@ release = 1
 desc = "Compiler for the GObject type system"
 license = "LGPL-2.1-or-later"
 depends = ["glib2"]
-build_depends = ["glib2", "flex", "bison", "graphviz"]
+build_depends = ["glib2", "flex", "bison"]
 
 [source]
 urls = [

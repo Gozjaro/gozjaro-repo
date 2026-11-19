@@ -5,7 +5,7 @@ release = 1
 desc = "Open-source implementation of the OpenGL specification"
 license = "MIT"
 depends = ["libdrm", "libxkbcommon", "wayland", "zlib", "expat"]
-build_depends = ["meson", "ninja", "python3", "libdrm", "wayland", "wayland-protocols", "libxkbcommon", "llvm", "clang", "python-mako"]
+build_depends = ["meson", "ninja", "python3", "libdrm", "wayland", "wayland-protocols", "libxkbcommon", "llvm", "mako"]
 
 [source]
 urls = [

@@ -1,0 +1,35 @@
+[package]
+name = "gnome-terminal"
+version = "3.52.4"
+release = 1
+desc = "GNOME Terminal"
+license = "GPL-2.0-or-later"
+depends = ["glib2", "gtk4", "vte3"]
+build_depends = ["meson", "ninja", "gobject-introspection", "glib2"]
+
+[source]
+urls = [
+    { url = "https://download.gnome.org/sources/gnome-terminal/3.52/gnome-terminal-3.52.4.tar.xz" , sha256 = "f16883ac29c34091007827fa08d68ae0d3c9cd1fdfe9c30c1231a797feaac693"},
+]
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "meson setup \\",
+    "build . \\",
+    "--prefix=/usr \\",
+    "--sysconfdir=/etc \\",
+    "--buildtype=release \\",
+    "-Dtests=false \\",
+    "-Dman=false",
+    "ninja -C build",
+    "",
+    "",
+    "DESTDIR=\"$DESTDIR\" ninja -C build install",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

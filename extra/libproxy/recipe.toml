@@ -1,0 +1,27 @@
+[package]
+name = "libproxy"
+version = "0.5.12"
+release = 1
+desc = "Client-side automatic proxy detection"
+license = "MIT"
+depends = []
+build_depends = ["make"]
+
+[source]
+git = "git+https://github.com/libproxy/libproxy#0ac628598eb742f697b692014ae204eca0f75512"
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# pinned to the commit used by Arch (libproxy 0.5.12 generation)",
+    "make",
+    "",
+    "",
+    "make DESTDIR=\"$DESTDIR\" install",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

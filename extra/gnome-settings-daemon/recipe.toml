@@ -1,0 +1,37 @@
+[package]
+name = "gnome-settings-daemon"
+version = "47.2"
+release = 1
+desc = "GNOME settings daemon"
+license = "MIT"
+depends = ["glib2", "gtk4", "gnome-desktop", "gsettings-desktop-schemas", "libgtop"]
+build_depends = ["meson", "ninja", "gobject-introspection", "vala"]
+
+[source]
+urls = [
+    { url = "https://download.gnome.org/sources/gnome-settings-daemon/47/gnome-settings-daemon-47.2.tar.xz" , sha256 = "1eb758862e888f55a0869193087f1cfbcc7a1163654e630099ff4342dd3f6a5a"},
+]
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# optional modules (libcanberra/gstreamer) auto-disable when their libs are absent",
+    "meson setup \\",
+    "build . \\",
+    "--prefix=/usr \\",
+    "--sysconfdir=/etc \\",
+    "--buildtype=release \\",
+    "-Dsystem-stats=enabled \\",
+    "-Dtests=false \\",
+    "-Dman=false",
+    "ninja -C build",
+    "",
+    "",
+    "DESTDIR=\"$DESTDIR\" ninja -C build install",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

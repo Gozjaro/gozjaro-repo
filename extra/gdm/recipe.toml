@@ -1,0 +1,39 @@
+[package]
+name = "gdm"
+version = "47.0"
+release = 1
+desc = "GNOME Display Manager"
+license = "MIT"
+depends = ["glib2", "gtk4", "cairo", "pango", "systemd", "polkit", "pam", "gnome-desktop"]
+build_depends = ["meson", "ninja", "gobject-introspection"]
+
+[source]
+urls = [
+    { url = "https://download.gnome.org/sources/gdm/47/gdm-47.0.tar.xz" , sha256 = "c5858326bfbcc8ace581352e2be44622dc0e9e5c2801c8690fd2eed502607f84"},
+]
+patches = []
+
+[build]
+system = "raw"
+steps = [
+    "# GNOME 47 generation (matches gnome-shell 47.x stack)",
+    "meson setup \\",
+    "build . \\",
+    "--prefix=/usr \\",
+    "--sysconfdir=/etc \\",
+    "--buildtype=release \\",
+    "-Ddefault-pam-config=arch \\",
+    "-Ddistro=gozjaro \\",
+    "-Dsystemd=true \\",
+    "-Dman=false \\",
+    "-Dtests=false",
+    "ninja -C build",
+    "",
+    "",
+    "DESTDIR=\"$DESTDIR\" ninja -C build install",
+]
+
+[install]
+post = []
+files = "auto"
+backup = []

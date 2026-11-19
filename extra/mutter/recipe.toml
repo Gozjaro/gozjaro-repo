@@ -5,7 +5,7 @@ release = 1
 desc = "A window manager and Wayland compositor for GNOME"
 license = "GPL-2.0-or-later"
 depends = ["gnome-desktop", "glib2", "cairo", "pango", "libxkbcommon", "wayland", "libdrm", "mesa", "libinput"]
-build_depends = ["meson", "ninja", "gobject-introspection", "wayland-protocols", "gnome-settings-daemon"]
+build_depends = ["meson", "ninja", "gobject-introspection", "wayland-protocols"]
 
 [source]
 urls = [
