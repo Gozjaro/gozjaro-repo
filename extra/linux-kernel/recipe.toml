@@ -3,7 +3,7 @@ name = "linux-kernel"
 version = "7.1.8"
 release = 1
 arch = "x86_64"
-desc = "Pre-built GozJaro kernel 7.1.8: vmlinuz-7.1.8-gozjaro, /lib/modules/7.1.8 (11 ko + builtin lists), initramfs initrd-7.1.8-gozjaro.img, System.map + config. Packages the tree's stage 80/85 build artifacts so an installed system can switch kernel with 'gozpak get linux-kernel' instead of a source rebuild."
+desc = "Pre-built GozJaro kernel 7.1.8: vmlinuz-7.1.8-gozjaro, /lib/modules/7.1.8 (11 ko + builtin lists), initramfs initrd-7.1.8-gozjaro.img, System.map + config. Packages the tree's stage 80/85 build artifacts so an installed system can switch kernel with 'gozpak get linux-kernel' instead of a source rebuild. Post-install runs the grub-mkconfig registry hook to regenerate the boot entry (skipped, non-fatal, if grub-mkconfig is absent)."
 license = "GPL-2.0-or-later"
 depends = []
 
@@ -19,9 +19,6 @@ steps = [
 ]
 
 [install]
-post = [
-"if command -v grub-mkconfig >/dev/null 2>&1; then grub-mkconfig -o /boot/grub/grub.cfg || echo 'grub-mkconfig failed - add a grub entry manually'; fi",
-"echo 'linux-kernel 7.1.8-gozjaro installed: /boot/vmlinuz-7.1.8-gozjaro'",
-]
+post = ["grub-mkconfig"]
 files = "auto"
 backup = []
