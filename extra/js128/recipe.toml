@@ -5,7 +5,7 @@ release = 1
 desc = "SpiderMonkey JavaScript engine and libraries (mozjs-128), standalone build from Firefox ESR source"
 license = "MPL-2.0"
 depends = ["zlib"]
-build_depends = ["python3", "rust", "zlib", "python311"]
+build_depends = ["python3", "rust", "zlib", "python311", "llvm"]
 
 [source]
 urls = [
