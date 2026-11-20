@@ -34,7 +34,7 @@ steps = [
     "python3.11 ./mach build",
     "",
     "",
-    "make -C obj DESTDIR=$DESTDIR install",
+    "make -C $(ls -d obj obj-* 2>/dev/null | head -1) DESTDIR=$DESTDIR install",
 ]
 
 [install]
