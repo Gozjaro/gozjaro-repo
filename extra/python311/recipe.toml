@@ -28,7 +28,7 @@ steps = [
     "# the install step creates generic python/python3 symlinks in the layer",
     "# that would shadow the LFS-tree python3 (3.14, primary); keep only the",
     "# versioned python3.11 binary so the distro python stays the tree's.",
-    "rm -f $DESTDIR/usr/bin/python $DESTDIR/usr/bin/python3",
+    "rm -f $DESTDIR/usr/bin/python $DESTDIR/usr/bin/python3 $DESTDIR/usr/bin/python3-config",
 ]
 
 [install]
