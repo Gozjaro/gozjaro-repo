@@ -28,7 +28,7 @@ steps = [
     "cmake --build build",
     "",
     "",
-    "DESTDIR=\\\"$DESTDIR\\\" cmake --install build",
+    "DESTDIR=$DESTDIR cmake --install build",
 ]
 
 [install]
