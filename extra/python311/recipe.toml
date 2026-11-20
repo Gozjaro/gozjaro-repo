@@ -14,15 +14,24 @@ urls = [
 patches = []
 
 [build]
-system = "autotools"
-args = [
-    "--prefix=/usr",
-    "--enable-shared",
+system = "raw"
+steps = [
+    "# autotools build; bootstrap python = tree python3 (3.14), which can build 3.11",
+    "./configure \\",
+    "--prefix=/usr \\",
+    "--enable-shared \\",
     "--with-ensurepip=install",
+    "make -j$(nproc)",
+    "",
+    "",
+    "make DESTDIR=\\\"$DESTDIR\\\" install",
+    "# the install step creates generic python/python3 symlinks in the layer",
+    "# that would shadow the LFS-tree python3 (3.14, primary); keep only the",
+    "# versioned python3.11 binary so the distro python stays the tree's.",
+    "rm -f \\\"$DESTDIR/usr/bin/python\" \\\"$DESTDIR/usr/bin/python3\"",
 ]
 
 [install]
-post = ["# python configure installs a generic python3 symlink that would shadow the LFS-tree python3 (3.14) in the persistent layer; keep only the versioned python3.11 binary",
-    "rm -f /usr/bin/python /usr/bin/python3"]
+post = []
 files = "auto"
 backup = []
