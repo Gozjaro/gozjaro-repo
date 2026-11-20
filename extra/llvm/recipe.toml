@@ -17,7 +17,8 @@ patches = []
 system = "raw"
 steps = [
     "# arch-equivalent subset: LLVM core + clang, shared libs (mesa -Dshared-llvm=enabled)",
-    "cmake -B build -G Ninja \\",
+    "# llvmorg-23.1.6 is the llvm-project monorepo; the CMake project is the llvm/ subdirectory",
+    "cmake -S llvm -B build -G Ninja \\",
     "-DCMAKE_BUILD_TYPE=Release \\",
     "-DCMAKE_INSTALL_PREFIX=/usr \\",
     "-DLLVM_ENABLE_PROJECTS=clang \\",
