@@ -3,7 +3,7 @@
 @@ -1346,14 +1346,14 @@
                  }
                  PyTuple_SET_ITEM(t, 0, v);
- 
+
 -                if (name->d.ip->length == 4) {
 -                    unsigned char *p = name->d.ip->data;
 +                if (ASN1_STRING_length(name->d.ip) == 4) {
@@ -20,3 +20,24 @@
                      len = sprintf(
                          buf,
                          "%X:%X:%X:%X:%X:%X:%X:%X",
+@@ -1487,8 +1487,8 @@
+             continue;
+         }
+         uri = ad->location->d.uniformResourceIdentifier;
+-        ostr = PyUnicode_FromStringAndSize((char *)uri->data,
+-                                           uri->length);
++        ostr = PyUnicode_FromStringAndSize((char *)ASN1_STRING_get0_data(uri),
++                                           ASN1_STRING_length(uri));
+         if (ostr == NULL) {
+             goto fail;
+         }
+@@ -1554,8 +1554,8 @@
+                 continue;
+             }
+             uri = gn->d.uniformResourceIdentifier;
+-            ouri = PyUnicode_FromStringAndSize((char *)uri->data,
+-                                               uri->length);
++            ouri = PyUnicode_FromStringAndSize((char *)ASN1_STRING_get0_data(uri),
++                                               ASN1_STRING_length(uri));
+             if (ouri == NULL)
+                 goto done;
