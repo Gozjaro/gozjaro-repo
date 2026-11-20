@@ -2,7 +2,7 @@
 name = "busybox"
 version = "1.37.0"
 release = 1
-desc = "Size-optimized toolbox of Unix utilities"
+desc = "Size-optimized toolbox of Unix utilities (binary only; applets via 'busybox <cmd>')"
 license = "GPL-2.0-only"
 depends = []
 build_depends = []
@@ -27,9 +27,12 @@ steps = [
     "",
     "",
     "cd \".\"",
+    # Applet symlinks (make CONFIG_PREFIX=... install) must NOT be shipped:
+    # the chroot build layer stacks this package under the LFS root, where
+    # /usr/bin/{patch,diff,sed,awk,tar,...} symlinks would shadow the GNU
+    # tools — busybox's patch applet silently drops multi-hunk patches.
+    # Ship the binary only; applets stay reachable via `busybox <cmd>`.
     "install -Dm755 busybox \"$DESTDIR/usr/bin/busybox\"",
-    "make CONFIG_PREFIX=\"$DESTDIR\" install",
-    "rm -f \"$DESTDIR/bin/busybox\"",
 ]
 
 [install]
