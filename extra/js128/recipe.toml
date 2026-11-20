@@ -11,7 +11,9 @@ build_depends = ["python3", "rust", "zlib", "python311", "llvm"]
 urls = [
     { url = "https://archive.mozilla.org/pub/firefox/releases/128.14.0esr/source/firefox-128.14.0esr.source.tar.xz" , sha256 = "93b9ef6229f41cb22ff109b95bbf61a78395a0fe4b870192eeca22947cb09a53"},
 ]
-patches = []
+patches = [
+  "rust-triplet-pc-vendor.patch"
+]
 
 [build]
 system = "raw"

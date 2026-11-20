@@ -1,0 +1,30 @@
+--- a/build/moz.configure/rust.configure
++++ b/build/moz.configure/rust.configure
+@@ -323,7 +323,7 @@
+             elif narrowed:
+                 candidates = narrowed
+ 
+-            vendor_aliases = {"pc": ("w64", "windows")}
++            vendor_aliases = {"pc": ("w64", "windows", "unknown")}
+             narrowed = [
+                 c
+                 for c in candidates
+@@ -409,6 +409,18 @@
+         if len(narrowed) == 1:
+             return narrowed[0].rust_target
+ 
++        # A GNU triplet vendor ("pc", e.g. x86_64-pc-linux-gnu as reported by
++        # some rustc host triples) is equivalent to the "unknown" vendor in
++        # Rust target names; prefer the gnu variant.
++        if host_or_target.vendor == "pc":
++            narrowed = [
++                c
++                for c in candidates
++                if c.target.vendor == "unknown" and c.rust_target.endswith("-gnu")
++            ]
++            if len(narrowed) == 1:
++                return narrowed[0].rust_target
++
+         return None
+ 
+     rustc_target = find_candidate(candidates)
