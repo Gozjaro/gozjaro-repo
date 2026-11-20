@@ -31,7 +31,7 @@
          if (ostr == NULL) {
              goto fail;
          }
-@@ -1554,8 +1554,8 @@
+@@ -1554,7 +1554,7 @@
                  continue;
              }
              uri = gn->d.uniformResourceIdentifier;

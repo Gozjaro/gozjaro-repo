@@ -14,7 +14,10 @@ urls = [
 # OpenSSL 4.x makes ASN1_OCTET_STRING an opaque typedef; _ssl.c no longer
 # dereferences name->d.ip->length / ->data directly — use the opaque-API
 # equivalents (ASN1_STRING_length / ASN1_STRING_get0_data).
-patches = ["ssl-openssl4-asn1-opaque.patch"]
+patches = [
+  "ssl-openssl4-asn1-opaque.patch",
+  "ssl-openssl4-removed-tls-methods.patch"
+]
 
 [build]
 system = "raw"

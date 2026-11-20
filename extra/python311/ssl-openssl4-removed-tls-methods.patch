@@ -1,0 +1,22 @@
+--- a/Modules/_ssl.c
++++ b/Modules/_ssl.c
+@@ -118,6 +118,18 @@
+ #include "_ssl_data_111.h"
+ #else
+ #include "_ssl_data.h"
+ #endif
++
++#if OPENSSL_VERSION_NUMBER >= 0x40000000L
++/* OpenSSL 4.0 removed SSLv3 and TLS 1.0/1.1 along with their *_method()
++ * API functions (TLSv1_method, TLSv1_1_method, SSLv3_method). Define the
++ * classic feature-disable macros so the guards below skip those version
++ * methods and their externs; TLS 1.2/1.3 methods are unaffected. */
++#define OPENSSL_NO_SSL3
++#define OPENSSL_NO_TLS1
++#define OPENSSL_NO_TLS1_METHOD
++#define OPENSSL_NO_TLS1_1
++#define OPENSSL_NO_TLS1_1_METHOD
++#endif
+ 
+ /* OpenSSL API 1.1.0+ does not include version methods */
+ #ifndef OPENSSL_NO_SSL3_METHOD
