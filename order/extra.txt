@@ -208,3 +208,4 @@ hicolor-icon-theme
 adwaita-icon-theme
 accountsservice
 js128
+python311

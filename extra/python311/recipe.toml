@@ -1,0 +1,28 @@
+[package]
+name = "python311"
+version = "3.11.13"
+release = 1
+desc = "Python 3.11 (arch-style multi-version coexistence; firefox 128 mach requires python <= 3.11)"
+license = "PSF-2.0"
+depends = ["zlib", "openssl", "readline", "sqlite", "libffi"]
+build_depends = ["zlib", "openssl", "readline", "sqlite", "libffi", "xz"]
+
+[source]
+urls = [
+    { url = "https://www.python.org/ftp/python/3.11.13/Python-3.11.13.tgz" , sha256 = "0f1a22f4dfd34595a29cf69ee7ea73b9eff8b1cc89d7ab29b3ab0ec04179dad8"},
+]
+patches = []
+
+[build]
+system = "autotools"
+args = [
+    "--prefix=/usr",
+    "--enable-shared",
+    "--with-ensurepip=install",
+]
+
+[install]
+post = ["# python configure installs a generic python3 symlink that would shadow the LFS-tree python3 (3.14) in the persistent layer; keep only the versioned python3.11 binary",
+    "rm -f /usr/bin/python /usr/bin/python3"]
+files = "auto"
+backup = []
