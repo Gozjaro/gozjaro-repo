@@ -1,6 +1,6 @@
 --- a/Modules/_ssl.c
 +++ b/Modules/_ssl.c
-@@ -118,6 +118,18 @@
+@@ -118,6 +118,20 @@
  #include "_ssl_data_111.h"
  #else
  #include "_ssl_data.h"
@@ -16,6 +16,8 @@
 +#define OPENSSL_NO_TLS1_METHOD
 +#define OPENSSL_NO_TLS1_1
 +#define OPENSSL_NO_TLS1_1_METHOD
++#define OPENSSL_NO_TLS1_2
++#define OPENSSL_NO_TLS1_2_METHOD
 +#endif
  
  /* OpenSSL API 1.1.0+ does not include version methods */
