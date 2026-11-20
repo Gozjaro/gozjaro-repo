@@ -11,7 +11,10 @@ build_depends = ["zlib", "openssl", "readline", "sqlite", "libffi", "xz"]
 urls = [
     { url = "https://www.python.org/ftp/python/3.11.13/Python-3.11.13.tgz" , sha256 = "0f1a22f4dfd34595a29cf69ee7ea73b9eff8b1cc89d7ab29b3ab0ec04179dad8"},
 ]
-patches = []
+# OpenSSL 4.x makes ASN1_OCTET_STRING an opaque typedef; _ssl.c no longer
+# dereferences name->d.ip->length / ->data directly — use the opaque-API
+# equivalents (ASN1_STRING_length / ASN1_STRING_get0_data).
+patches = ["ssl-openssl4-asn1-opaque.patch"]
 
 [build]
 system = "raw"

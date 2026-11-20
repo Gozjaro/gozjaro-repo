@@ -1,0 +1,22 @@
+--- a/Modules/_ssl.c
++++ b/Modules/_ssl.c
+@@ -1346,14 +1346,14 @@
+                 }
+                 PyTuple_SET_ITEM(t, 0, v);
+ 
+-                if (name->d.ip->length == 4) {
+-                    unsigned char *p = name->d.ip->data;
++                if (ASN1_STRING_length(name->d.ip) == 4) {
++                    const unsigned char *p = ASN1_STRING_get0_data(name->d.ip);
+                     v = PyUnicode_FromFormat(
+                         "%d.%d.%d.%d",
+                         p[0], p[1], p[2], p[3]
+                     );
+-                } else if (name->d.ip->length == 16) {
++                } else if (ASN1_STRING_length(name->d.ip) == 16) {
+                     /* PyUnicode_FromFormat() does not support %X */
+-                    unsigned char *p = name->d.ip->data;
++                    const unsigned char *p = ASN1_STRING_get0_data(name->d.ip);
+                     len = sprintf(
+                         buf,
+                         "%X:%X:%X:%X:%X:%X:%X:%X",
