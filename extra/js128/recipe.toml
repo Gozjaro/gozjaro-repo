@@ -28,6 +28,8 @@ steps = [
     "# build env PATH has gozpak's rustup proxies (CARGO_HOME/bin) with no toolchain configured, which shadows the layer's real toolchain; pin the real binaries so mach bypasses rustup entirely",
     "export RUSTC=/usr/bin/rustc",
     "export CARGO=/usr/bin/cargo",
+    "# firefox 128 configure (bindgen.configure) requires cbindgen >= 0.26.0 on the bootstrap or cargo bin path; with --disable-bootstrap install it via cargo (idempotent no-op when present)",
+    "cargo install cbindgen --version 0.26.0",
     "# firefox 128 mach requires python <= 3.11; the tree python is 3.14, so use the python311 layer binary",
     "python3.11 ./mach build",
     "",
