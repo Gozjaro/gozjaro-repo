@@ -23,6 +23,8 @@ steps = [
     "printf \"%s\\n\" \"ac_add_options --enable-application=js\" \"ac_add_options --prefix=/usr\" \"ac_add_options --enable-release\" \"ac_add_options --enable-optimize\" \"ac_add_options --disable-bootstrap\" \"ac_add_options --disable-debug\" \"ac_add_options --disable-jemalloc\" \"ac_add_options --disable-strip\" \"ac_add_options --with-system-zlib\" \"ac_add_options --without-system-icu\" \"ac_add_options --enable-shared-js\" \"ac_add_options --with-intl-api\" > .mozconfig",
     "export MOZBUILD_STATE_PATH=\"$PWD/mozbuild\"",
     "export MOZ_NOSPAM=1",
+    "# layer rustup has installed toolchains but no default; pin RUSTUP_TOOLCHAIN so mach/rustup resolve without downloading",
+    "export RUSTUP_TOOLCHAIN=$(rustup toolchain list | head -1 | sed 's/ .*//')",
     "# firefox 128 mach requires python <= 3.11; the tree python is 3.14, so use the python311 layer binary",
     "python3.11 ./mach build",
     "",
