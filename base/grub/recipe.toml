@@ -1,9 +1,9 @@
 [package]
 name = "grub"
 version = "2.14"
-release = 2
+release = 3
 arch = "x86_64"
-desc = "GRUB 2.14 bootloader userland: grub-mkconfig / grub-install / grub-mkrescue + x86_64-efi platform modules. Provides the grub-mkconfig tool so the gozpak install-side hook (grub-mkconfig) can regenerate the boot entry after kernel installs."
+desc = "GRUB 2.14 bootloader userland: grub-mkconfig / grub-install / grub-mkrescue + x86_64-efi platform modules. Provides the grub-mkconfig tool so the gozpak install-side hook (grub-mkconfig) can regenerate the boot entry after kernel installs. i386-pc MBR stays at its natural 0x7C00 link base; the i386-pc kernel image is pinned to an exact 0x9000 entry via a scoped kernel_exec_LDFLAGS append (r2 global TARGET_IMG_LDFLAGS pin also dragged the MBR to 0x9000, breaking legacy BIOS disk boot).
 license = "GPL-3.0-or-later"
 depends = ["glib2", "zlib"]
 
@@ -16,10 +16,19 @@ patches = []
 [build]
 system = "raw"
 steps = [
+# grub 2.14 image-base regression (Gentoo 2026-01-16; binutils >= 2.44):
+# with auto-detected --image-base support, ld places the i386-pc kernel
+# image .text at 0x9074 (base + ELF/PHDR gap) instead of the exact 0x9000
+# entry. Pin the kernel image .text ONLY (scoped to kernel_exec_LDFLAGS in
+# the source .am, applied BEFORE configure so the generated Makefile carries
+# it). A global TARGET_IMG_LDFLAGS (r2) drags boot.img (the MBR, which must
+# stay at its .org 0x7C00) to 0x9000 as well: the MBR real_start self-jump
+# then lands in zeroed RAM and legacy BIOS boot hangs (SeaBIOS IRQ0 storm).
+"sed -i 's/^\(kernel_exec_LDFLAGS.*\),0x9000.*$/\1,0x9000 -Wl,-N -Wl,-Ttext,0x9000/' grub-core/Makefile.core.am",
 # dash-safe single-purpose lines; LFS-style configure generates the
 # grub-mkconfig script by default (no special flag needed)
 "./configure --prefix=/usr --sysconfdir=/etc --libdir=/usr/lib --with-platforms=x86_64-efi,i386-pc --enable-grub2 --disable-werror",
-"make -j$(nproc) TARGET_IMG_LDFLAGS=\"-Wl,-N -Wl,-Ttext,0x9000\"",
+"make -j$(nproc)",
 "make install DESTDIR=$DESTDIR",
 # verify the tool the gozpak hook needs actually landed
 "test -x $DESTDIR/usr/sbin/grub-mkconfig || test -x $DESTDIR/usr/bin/grub-mkconfig",
